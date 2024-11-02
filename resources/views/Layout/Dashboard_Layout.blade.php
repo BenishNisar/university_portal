@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>HSE</title>
+  <title>University Examination Portal</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('Dashboard_assets/img/health_safety_environment.jpg')}}" rel="icon">
+  <link href="{{asset('Dashboard_assets/img/Ilama_University.png')}}" rel="icon">
   <link href="{{ asset( 'Dashboard_assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -128,7 +128,7 @@ footer {
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown" style="color: darkgray; transition: none; font-size: 15px;">
                     <i class="bi bi-person-circle"></i> <!-- Profile icon instead of image -->
-                    <span class="d-none d-md-block ps-2">Admin</span>
+                    <span class="d-none d-md-block ps-2"></span>
                 </a><!-- End Profile Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -227,7 +227,7 @@ footer {
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-          &copy; Copyright <strong><span>Health Safety And Environment</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>University Examination Portal</span></strong>. All Rights Reserved
         </div>
 
 

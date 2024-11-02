@@ -1,7 +1,7 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a style="font-size:15px;" class="nav-link" href="{{ asset('dashboard') }}">
+      <a style="font-size:15px;" class="nav-link" href="{{ asset('/') }}">
         <i style="color: gray;" class="fas fa-tachometer-alt"></i>
         <span style="font-size: 12px;">Dashboard</span>
       </a>
