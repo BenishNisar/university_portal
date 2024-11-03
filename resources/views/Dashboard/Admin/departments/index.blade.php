@@ -55,7 +55,7 @@
                             </thead>
                             <tbody>
 
-                                @foreach($departments as $department)
+                                {{-- @foreach($departments as $department)
                                 <tr>
                                     <td>{{ $department->id }}</td>
                                     <td>{{ $department->department_name }}</td>
@@ -68,7 +68,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
 
                             </tbody>
                         </table>

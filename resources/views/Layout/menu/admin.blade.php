@@ -25,7 +25,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ asset('dashboard/admin/role') }}">
+          <a href="{{ asset('/departments') }}">
             <i class="bi bi-circle"></i><span>Department</span>
           </a>
         </li>
@@ -39,7 +39,7 @@
       </a>
       <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="{{ asset('dashboard/admin/incidents') }}">
+          <a href="{{ asset('/courses') }}">
             <i class="bi bi-circle"></i><span>Courses</span>
           </a>
         </li>
@@ -53,12 +53,12 @@
       </a>
       <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="forms-elements.html">
+          <a href="{{ asset('/programlearning') }}">
             <i class="bi bi-circle"></i><span>Program Learning Outcomes</span>
           </a>
         </li>
         <li>
-          <a href="forms-layouts.html">
+          <a href="{{ asset('/courselearning') }}">
             <i class="bi bi-circle"></i><span>Course Learning Outcomes</span>
           </a>
         </li>
@@ -72,7 +72,7 @@
       </a>
       <ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="{{ asset('dashboard/admin/role') }}">
+          <a href="{{ asset('/clo_plo') }}">
             <i class="bi bi-circle"></i><span>CLO_PLO_Map</span>
           </a>
         </li>
@@ -86,12 +86,12 @@
       </a>
       <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="charts-chartjs.html">
+          <a href="{{ asset('/assessments') }}">
             <i class="bi bi-circle"></i><span>Assessments</span>
           </a>
         </li>
         <li>
-          <a href="charts-chartjs.html">
+          <a href="{{ asset('/student_assessments') }}">
             <i class="bi bi-circle"></i><span>Student_Assessments</span>
           </a>
         </li>
@@ -99,17 +99,12 @@
     </li><!-- End Assessments Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ url('dashboard/admin/incidents') }}">
+      <a class="nav-link collapsed" href="{{ url('/notification') }}">
         <i style="color: gray; font-size:15px;" class="fas fa-bell"></i>
         <span>Notification</span>
       </a>
     </li><!-- End Notification Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-error-404.html">
-        <i style="color: gray; font-size:15px;" class="fas fa-exclamation-circle"></i>
-        <span>Error 404</span>
-      </a>
-    </li><!-- End Error 404 Page Nav -->
+  
 
   </ul>

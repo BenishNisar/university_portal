@@ -11,8 +11,8 @@ class DepartmentsController extends Controller
     public function index()
     {
         // Fetch all departments from the database
-        $departments = Department::all();
-        return view('Dashboard.admin.departments.index', compact('departments'));
+
+        return view('Dashboard.admin.departments.index');
     }
 
     // Show the form for creating a new department

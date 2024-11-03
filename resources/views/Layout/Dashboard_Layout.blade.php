@@ -127,7 +127,7 @@ footer {
             <!-- Profile Icon -->
             <li class="nav-item dropdown">
                 <a class="nav-link nav-icon dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgray; transition: none; font-size: 15px;">
-                    <img src="{{ Auth::user()->profile_img ? asset('storage/' . Auth::user()->profile_img) : asset('images/default-profile.png') }}" class="img-xs rounded-circle" alt="Profile Image" style="width: 30px; height: 30px;">
+                    <img class="img-xs rounded-circle" src="{{ asset(Auth::user()->profile_img) }}" alt="" style="width: 30px; height: 30px;">
 
                     <span class="navbar-profile-name">{{ Auth::user()->firstname }}</span>
                     <i class="mdi mdi-menu-down"></i>
@@ -135,7 +135,7 @@ footer {
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                  
                 </ul>
             </li>
             <!-- End Profile Nav -->
