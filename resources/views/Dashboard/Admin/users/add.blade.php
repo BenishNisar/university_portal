@@ -31,7 +31,7 @@
             <input type="number" name="department_id" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="profile_img">Profile Image URL</label>
+            <label for="profile_img">Profile Image</label>
             <input type="file" name="profile_img" class="form-control">
         </div>
         <div class="form-group">

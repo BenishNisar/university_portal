@@ -40,10 +40,17 @@ class UsersController extends Controller
            ]);
 
            // Handle file upload
-           $path = null;
-           if ($request->hasFile('profile_img')) {
-               $path = $request->file('profile_img')->store('profile_images', 'public'); // Store in 'storage/app/public/profile_images'
-           }
+      // Handle file upload
+$path = null;
+if ($request->hasFile('profile_img')) {
+    // Specify the destination path inside 'public/assets/profile_images'
+    $destinationPath = public_path('assets/profile_images');
+    $file = $request->file('profile_img');
+    $filename = time() . '_' . $file->getClientOriginalName(); // Generate a unique filename
+    $file->move($destinationPath, $filename); // Move the file to 'public/assets/profile_images'
+    $path = 'assets/profile_images/' . $filename; // Save the relative path
+}
+
 
            // Create new user with encrypted password
            User::create([
@@ -100,10 +107,14 @@ class UsersController extends Controller
            $user->department_id = $request->department_id;
 
            // Handle profile image upload
-           if ($request->hasFile('profile_img')) {
-               $path = $request->file('profile_img')->store('profile_images', 'public'); // Store in 'storage/app/public/profile_images'
-               $user->profile_img = $path; // Save the new image path
-           }
+    // Handle profile image upload
+if ($request->hasFile('profile_img')) {
+    $destinationPath = public_path('assets/profile_images');
+    $file = $request->file('profile_img');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $file->move($destinationPath, $filename);
+    $user->profile_img = 'assets/profile_images/' . $filename; // Update the path in the database
+}
 
            $user->gender = $request->gender;
            $user->country = $request->country;

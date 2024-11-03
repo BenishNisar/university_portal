@@ -74,14 +74,16 @@
                                         <td>{{ $item->country }}</td>
                                         <td>{{ $item->city }}</td>
 
-
                                         <td>
                                             @if($item->profile_img)
-                                                <img src="{{ asset('storage/' . $item->profile_img) }}" alt="Profile Image" style="width: 50px; height: auto;">
+                                                <!-- Use the saved path directly in the src attribute -->
+                                                <img src="{{ asset($item->profile_img) }}" alt="Profile Image" style="width: 50px; height: auto;">
                                             @else
                                                 No Image
                                             @endif
                                         </td>
+
+
 
 
 
