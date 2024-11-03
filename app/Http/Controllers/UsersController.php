@@ -80,7 +80,7 @@ class UsersController extends Controller
                'password' => 'nullable|string|min:8',
                'role_id' => 'required|integer',
                'department_id' => 'required|integer',
-               'profile_img' => 'nullable|string|max:200',
+               'profile_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                'gender' => 'nullable|in:female,male',
                'country' => 'required|string|max:300',
                'city' => 'nullable|string|max:300',
@@ -90,20 +90,29 @@ class UsersController extends Controller
            $user->firstname = $request->firstname;
            $user->lastname = $request->lastname;
            $user->email = $request->email;
+
+           // Update password if a new one is provided
            if ($request->password) {
-               $user->password = bcrypt($request->password); // Encrypting the password
+               $user->password = bcrypt($request->password);
            }
+
            $user->role_id = $request->role_id;
            $user->department_id = $request->department_id;
-           $user->profile_img = $request->profile_img;
+
+           // Handle profile image upload
+           if ($request->hasFile('profile_img')) {
+               $path = $request->file('profile_img')->store('profile_images', 'public'); // Store in 'storage/app/public/profile_images'
+               $user->profile_img = $path; // Save the new image path
+           }
+
            $user->gender = $request->gender;
            $user->country = $request->country;
            $user->city = $request->city;
            $user->save();
 
-           return redirect()->route('admin.users.index')->with('success', 'User added successfully.');
-
+           return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
        }
+
 
        // Remove the specified user from storage
        public function destroy($id)

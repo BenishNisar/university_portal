@@ -50,7 +50,7 @@
             <label for="city">City</label>
             <input type="text" name="city" class="form-control">
         </div>
-        <button type="submit" class="btn btn-success">Add User</button>
+        <button type="submit" class="btn btn-success mt-2">Add User</button>
     </form>
 </div>
 @endsection
