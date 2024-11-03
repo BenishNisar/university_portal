@@ -22,12 +22,12 @@
       </a>
       <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="{{ asset('/users') }}">
+          <a href="{{ asset('') }}">
             <i class="bi bi-circle"></i><span>Enrolled Courses</span>
           </a>
         </li>
         <li>
-          <a href="{{ asset('/roles') }}">
+          <a href="{{ asset('') }}">
             <i class="bi bi-circle"></i><span>Faculty & Timings</span>
           </a>
         </li>
