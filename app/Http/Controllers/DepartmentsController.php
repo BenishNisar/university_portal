@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,10 @@ class DepartmentsController extends Controller
     public function index()
     {
         // Fetch all departments from the database
+        $departments = Department::all();
 
-        return view('Dashboard.admin.departments.index');
+
+        return view('Dashboard.admin.departments.index',compact('departments'));
     }
 
     // Show the form for creating a new department
@@ -26,7 +29,7 @@ class DepartmentsController extends Controller
     {
         // Validate incoming request
         $request->validate([
-            'department_name' => 'required|string|max:255|unique:departments,department_name',
+            'department_name' => 'required|string|max:255|unique:department,department_name',
         ]);
 
         // Create a new department
@@ -50,7 +53,7 @@ class DepartmentsController extends Controller
     {
         // Validate incoming request
         $request->validate([
-            'department_name' => 'required|string|max:255|unique:departments,department_name,' . $id,
+            'department_name' => 'required|string|max:255|unique:department,department_name,' . $id,
         ]);
 
         // Find the department and update it

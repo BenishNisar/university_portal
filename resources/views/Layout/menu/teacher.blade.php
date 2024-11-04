@@ -21,6 +21,15 @@
         </li>
 
         <li>
+            <a href="{{ asset('/courses_assigned') }}">
+              <i class="bi bi-circle"></i><span>Course Management</span>
+            </a>
+          </li>
+
+
+
+
+        <li>
             <a href="{{ asset('/schedule_timings') }}">
               <i class="bi bi-circle"></i><span>Schedule & Timings</span>
             </a>

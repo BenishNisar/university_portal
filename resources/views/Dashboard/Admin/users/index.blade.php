@@ -1,51 +1,74 @@
 @extends("Layout.Dashboard_Layout")
+
 @section("AdminContent")
 
 <style>
-    /* Ensure the table is responsive and the cell content wraps */
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .table-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto; /* Enables horizontal scrolling */
+        margin-top: 15px;
+        padding-bottom: 1rem; /* Space below the scroll bar */
+    }
+
     .table {
-        table-layout: auto; /* Allows the table to auto-adjust */
+        width: 1500px; /* Set fixed width to enable horizontal scroll if content overflows */
+        margin-bottom: 0;
     }
 
-    .table td {
-        overflow: hidden; /* Hide overflow */
-        white-space: nowrap; /* Prevent wrapping */
-        text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
-        max-width: 200px; /* Set a maximum width for the cell */
+    .table th, .table td {
+        padding: 10px 12px;
+        font-size: 14px;
+        white-space: nowrap;
+        text-align: left;
     }
 
-    .table td a {
-        display: inline-block; /* Ensures the link behaves properly */
-        overflow: hidden; /* Hide overflow */
-        white-space: nowrap; /* Prevent wrapping */
-        text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
-        max-width: 100%; /* Ensures the link respects the cell's width */
-        color: #007bff; /* Bootstrap link color */
-        text-decoration: none; /* Remove underline */
+    .add-new-btn {
+        background-color: #b10937;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-left: 15px;
     }
 
-    .table td a:hover {
-        text-decoration: underline; /* Underline on hover */
+    .add-new-btn:hover {
+        background-color: grey;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+    }
+
+    .actions i {
+        margin: 0 4px;
+        cursor: pointer;
+    }
+
+    .actions i:hover {
+        color: #b10937;
     }
 </style>
 
-<section class="section" style="border: 2px solid rgb(0, 238, 208)">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
+<div class="container-fluid mt-4 table-container">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-size: 23px;">Users</h1>
+        <a href="{{ url('/users/add') }}" class="add-new-btn">Add New</a>
+    </div>
 
-                    <h1 style="font-size: 20px;">Create Users</h1>
-                    <div class="d-flex justify-content-end">
-                        <a style="background-color: #b10937; color: white;" class="btn mb-3" href="{{ asset('/users/add') }}">
-                            <i class="fas fa-plus"></i> Create New
-                        </a>
-                    </div>
-                    {{-- <!-- Add table-responsive wrapper to prevent table overflow -->
-   <!-- Add table-responsive wrapper to prevent table overflow --> --}}
-   <div class="table-responsive">
+    <div class="table-wrapper">
 
-                        <table class="table table-striped table-bordered datatable">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>id</th>
@@ -57,6 +80,7 @@
                                     <th>Country</th>
                                     <th>City</th>
                                     <th>Profile_Image</th>
+                                    <th>Departments</th>
                                     <th>Role_id</th>
                                     <th>Martial_status</th>
                                 </tr>
@@ -85,9 +109,10 @@
 
 
 
+                                        <td>{{ $item->department->department_name ?? 'No Department' }}</td>
 
+                                        <td>{{ $item->role->role_name ?? 'No Role' }}</td>
 
-                                        <td>{{ $item->role_id }}</td>
 
                                         <td>
                                             <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -109,12 +134,9 @@
                             </tbody>
                         </table>
 
-                    </div> <!-- End of table-responsive -->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
+ </div>
+</div>
 
 @endsection
 

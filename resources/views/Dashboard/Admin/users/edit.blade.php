@@ -28,15 +28,29 @@
             <input type="password" name="password" class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="role_id">Role ID</label>
-            <input type="number" name="role_id" class="form-control" value="{{ $user->role_id }}" required>
-        </div>
+      <!-- Role -->
+      <div class="form-group">
+        <label for="role_id">Role</label>
+        <select name="role_id" class="form-control" required>
+            <option value="">Select Role</option>
+            @foreach($roles as $role)
+                <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+            @endforeach
+        </select>
+    </div>
 
-        <div class="form-group">
-            <label for="department_id">Department ID</label>
-            <input type="number" name="department_id" class="form-control" value="{{ $user->department_id }}" required>
-        </div>
+    <!-- Dynamic Department Selection -->
+    <div class="form-group">
+        <label for="department_id">Department</label>
+        <select name="department_id" class="form-control" required>
+            <option value="">Select Department</option>
+            @foreach($departments as $department)
+                <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+
 
         <div class="form-group">
             <label for="profile_img">Profile Image</label>

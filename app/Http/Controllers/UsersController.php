@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,14 +14,19 @@ class UsersController extends Controller
        // Display a listing of the users
        public function index()
        {
-           $users = DB::select('select * from users');
+        $users = User::with(['department', 'role'])->get();
+
            return view('Dashboard.admin.users.index', compact('users'));
        }
 
        // Show the form for creating a new user
        public function add()
        {
-           return view('Dashboard.Admin.users.add');
+        $roles = Role::all();
+        $departments = Department::all();
+
+        return view('Dashboard.Admin.users.add', compact('roles', 'departments'));
+
        }
 
        // Store a newly created user in storage
@@ -74,8 +81,12 @@ if ($request->hasFile('profile_img')) {
        public function edit($id)
        {
            $user = User::findOrFail($id);
-           return view('Dashboard.Admin.users.edit', compact('user'));
+           $roles = Role::all(); // Get all roles
+           $departments = Department::all(); // Get all departments
+
+           return view('Dashboard.Admin.users.edit', compact('user', 'roles', 'departments'));
        }
+
 
        // Update the specified user in storage
        public function update(Request $request, $id)
@@ -100,7 +111,7 @@ if ($request->hasFile('profile_img')) {
 
            // Update password if a new one is provided
            if ($request->password) {
-               $user->password = bcrypt($request->password);
+     $user->password = bcrypt($request->password);
            }
 
            $user->role_id = $request->role_id;

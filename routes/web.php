@@ -88,8 +88,31 @@ Route::delete('/roles/destroy/{id}', [RolesController::class, 'destroy'])->name(
 
 // Department
 Route::get('/departments',[DepartmentsController::class,"index"])->name('admin.departments.index');
+// Show the form to add a new department
+Route::get('/departments/add', [DepartmentsController::class, 'add'])->name('admin.departments.add');
+
+// Store the new department in the database
+Route::post('/departments', [DepartmentsController::class, 'store'])->name('admin.departments.store');
+
+// Show the form to edit an existing department
+Route::get('/departments/{id}/edit', [DepartmentsController::class, 'edit'])->name('admin.departments.edit');
+
+// Update an existing department
+Route::put('/departments/{id}', [DepartmentsController::class, 'update'])->name('admin.departments.update');
+
+// Optional: Delete a department
+Route::delete('/departments/{id}', [DepartmentsController::class, 'destroy'])->name('admin.departments.destroy');
+
 // courses
 Route::get('/courses',[CoursesController::class,"index"])->name('admin.courses.index');
+
+    Route::get('/courses/add', [CoursesController::class, 'add'])->name('admin.courses.add');
+    Route::post('/courses', [CoursesController::class, 'store'])->name('admin.courses.store');
+    Route::get('/courses/{id}/edit', [CoursesController::class, 'edit'])->name('admin.courses.edit');
+    Route::put('/courses/{id}', [CoursesController::class, 'update'])->name('admin.courses.update');
+    Route::delete('/courses/{id}', [CoursesController::class, 'destroy'])->name('admin.courses.destroy');
+
+
 // clo_plo
 Route::get('/clo_plo',[CloPloMapController::class,"index"])->name('admin.clo_plo.index');
 // program
