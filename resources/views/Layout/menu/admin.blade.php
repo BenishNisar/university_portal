@@ -43,6 +43,19 @@
             <i class="bi bi-circle"></i><span>Courses</span>
           </a>
         </li>
+
+
+        <li>
+            <a href="{{ asset('/batches') }}">
+              <i class="bi bi-circle"></i><span>Batches</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{{ asset('/course_assign') }}">
+              <i class="bi bi-circle"></i><span>Batches</span>
+            </a>
+          </li>
       </ul>
     </li><!-- End Courses Nav -->
 
@@ -105,6 +118,6 @@
       </a>
     </li><!-- End Notification Nav -->
 
-  
+
 
   </ul>

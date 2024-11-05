@@ -4,7 +4,9 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssessmentsController;
 use App\Http\Controllers\AttendenceRecordsController;
+use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CloPloMapController;
+use App\Http\Controllers\CourseAssignController;
 use App\Http\Controllers\CourseLearningController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\CreditHoursController;
@@ -111,6 +113,25 @@ Route::get('/courses',[CoursesController::class,"index"])->name('admin.courses.i
     Route::get('/courses/{id}/edit', [CoursesController::class, 'edit'])->name('admin.courses.edit');
     Route::put('/courses/{id}', [CoursesController::class, 'update'])->name('admin.courses.update');
     Route::delete('/courses/{id}', [CoursesController::class, 'destroy'])->name('admin.courses.destroy');
+
+
+// batches
+Route::get('/batches', [BatchController::class, 'index'])->name('admin.batches.index');
+Route::get('/batches/add', [BatchController::class, 'add'])->name('admin.batches.add');
+Route::post('/batches', [BatchController::class, 'store'])->name('admin.batches.store');
+Route::get('/batches/{id}/edit', [BatchController::class, 'edit'])->name('admin.batches.edit');
+Route::put('/batches/{id}', [BatchController::class, 'update'])->name('admin.batches.update');
+Route::delete('/batches/{id}', [BatchController::class, 'destroy'])->name('admin.batches.destroy');
+
+
+// course_assign
+
+Route::get('course_assign', [CourseAssignController::class, 'index'])->name('admin.course_assign.index');
+Route::get('course_assign/add', [CourseAssignController::class, 'add'])->name('admin.course_assign.add');
+Route::post('course_assign', [CourseAssignController::class, 'store'])->name('admin.course_assign.store');
+Route::get('course_assign/{id}/edit', [CourseAssignController::class, 'edit'])->name('admin.course_assign.edit');
+Route::put('course_assign/{id}', [CourseAssignController::class, 'update'])->name('admin.course_assign.update');
+Route::delete('course_assign/{id}', [CourseAssignController::class, 'destroy'])->name('admin.course_assign.destroy');
 
 
 // clo_plo
