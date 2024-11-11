@@ -17,4 +17,14 @@ class Batch extends Model
         'start_year',
         'end_year',
     ];
+
+// In Batch.php model
+public function quizzes()
+{
+    return $this->belongsToMany(Quiz::class, 'batch_quiz', 'batch_id', 'quiz_id');
+}
+
+
+
+
 }

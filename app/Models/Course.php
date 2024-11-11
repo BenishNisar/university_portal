@@ -14,4 +14,14 @@ class Course extends Model
         'description',
         'status',
     ];
+
+    public function studentCourses()
+    {
+        return $this->hasMany(StudentCourse::class, 'course_id');
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

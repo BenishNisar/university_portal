@@ -82,7 +82,7 @@
                                     <th>Profile_Image</th>
                                     <th>Departments</th>
                                     <th>Role_id</th>
-                                    <th>Martial_status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

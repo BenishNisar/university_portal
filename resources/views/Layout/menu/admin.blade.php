@@ -53,11 +53,46 @@
 
           <li>
             <a href="{{ asset('/course_assign') }}">
-              <i class="bi bi-circle"></i><span>Batches</span>
+              <i class="bi bi-circle"></i><span>Courses_Assign</span>
             </a>
           </li>
       </ul>
     </li><!-- End Courses Nav -->
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#student-nav" data-bs-toggle="collapse" href="#">
+          <i style="color: gray; font-size:15px;" class="fas fa-book-open"></i>
+          <span>Students</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="student-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ asset('/student/courses') }}">
+              <i class="bi bi-circle"></i><span>Student_Courses</span>
+            </a>
+          </li>
+
+
+          <li>
+              <a href="{{ asset('/assignments') }}">
+                <i class="bi bi-circle"></i><span>Assignment</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ asset('/quizzes') }}">
+                <i class="bi bi-circle"></i><span>Quizzes</span>
+              </a>
+            </li>
+
+          
+
+
+
+
+
+        </ul>
+      </li><!-- End Courses Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

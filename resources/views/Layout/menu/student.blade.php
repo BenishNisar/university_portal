@@ -14,6 +14,8 @@
           <span>Profile</span>
         </a>
       </li> --}}
+
+
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
         <i style="color: gray; font-size:15px;" class="fas fa-users-cog"></i>
@@ -21,7 +23,16 @@
         <i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
+     <!-- In your layout blade or sidebar -->
+<!-- In your layout blade or sidebar -->
+<li>
+    <a href="{{ route('student.assignment') }}">
+        <i class="bi bi-circle"></i><span>Assignment</span>
+    </a>
+</li>
+
+
+
           <a href="{{ asset('/courses') }}">
             <i class="bi bi-circle"></i><span>Enrolled Courses</span>
           </a>

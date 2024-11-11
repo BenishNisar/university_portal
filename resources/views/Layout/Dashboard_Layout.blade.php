@@ -133,9 +133,9 @@ footer {
                     <i class="mdi mdi-menu-down"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="/profile/index">Profile</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                  
+
                 </ul>
             </li>
             <!-- End Profile Nav -->

@@ -15,6 +15,11 @@
       </a>
       <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
+            <a href="{{ asset('/quizzes') }}">
+         <i class="bi bi-circle"></i><span>Quizzes</span>
+            </a>
+          </li>
+        <li>
           <a href="{{ asset('/courses') }}">
             <i class="bi bi-circle"></i><span>Course Management</span>
           </a>

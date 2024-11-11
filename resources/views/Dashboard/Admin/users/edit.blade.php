@@ -49,6 +49,15 @@
             @endforeach
         </select>
     </div>
+    <div class="form-group">
+        <label for="batch_id">Batch</label>
+        <select name="batch_id" id="batch_id" class="form-control">
+            <option value="">Select Batch</option>
+            @foreach($batches as $batch)
+                <option value="{{ $batch->id }}" {{ isset($user) && $user->batch_id == $batch->id ? 'selected' : '' }}>{{ $batch->name }}</option>
+            @endforeach
+        </select>
+    </div>
 
 
 

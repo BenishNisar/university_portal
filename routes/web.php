@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssessmentsController;
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttendenceRecordsController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CloPloMapController;
@@ -17,17 +18,21 @@ use App\Http\Controllers\FacultyTimingsController;
 use App\Http\Controllers\GradePerformanceController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramLearningController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScheduleTimingsController;
 use App\Http\Controllers\StudentAssessmentsController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentPerformanceTrackingController;
 use App\Http\Controllers\StudyMaterialController;
 use App\Http\Controllers\StudyMaterialsController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ViewEnrolledController;
+use App\Models\StudentCourse;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -132,6 +137,86 @@ Route::post('course_assign', [CourseAssignController::class, 'store'])->name('ad
 Route::get('course_assign/{id}/edit', [CourseAssignController::class, 'edit'])->name('admin.course_assign.edit');
 Route::put('course_assign/{id}', [CourseAssignController::class, 'update'])->name('admin.course_assign.update');
 Route::delete('course_assign/{id}', [CourseAssignController::class, 'destroy'])->name('admin.course_assign.destroy');
+// profile
+// In web.php
+Route::get('/profile/index', [ProfileController::class, 'index'])->name('profile.index');
+
+
+// students_courses
+  // Show all student courses
+  Route::get('/student/courses', [StudentCourseController::class, 'index'])->name('admin.student_courses.index');
+
+  // Show the form to add a new course
+  Route::get('/student/courses/add', [StudentCourseController::class, 'add'])->name('admin.student_courses.add');
+
+  // Store a new course
+  Route::post('/student/courses', [StudentCourseController::class, 'store'])->name('admin.student_courses.store');
+
+  // Show the form to edit an existing course
+  Route::get('/student/courses/{course_id}/edit', [StudentCourseController::class, 'edit'])->name('admin.student_courses.edit');
+
+  // Update an existing course
+  Route::put('/student/courses/{course_id}', [StudentCourseController::class, 'update'])->name('admin.student_courses.update');
+
+  // Delete a course
+  Route::delete('/student/courses/{course_id}', [StudentCourseController::class, 'destroy'])->name('admin.student_courses.destroy');
+
+// assignments
+Route::get('assignments', [AssignmentController::class, 'index'])->name('admin.assignments.index');
+
+// Show the form to create a new assignment
+Route::get('assignments/add', [AssignmentController::class, 'add'])->name('admin.assignments.add');
+
+// Store a new assignment
+Route::post('assignments', [AssignmentController::class, 'store'])->name('admin.assignments.store');
+
+// Show the form to edit an existing assignment
+Route::get('assignments/{id}/edit', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
+
+// Update an existing assignment
+Route::put('assignments/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
+
+// Delete an assignment
+Route::delete('assignments/{id}', [AssignmentController::class, 'destroy'])->name('admin.assignments.destroy');
+
+
+
+// quizess
+    // Display all quizzes
+    Route::get('/quizzes', [QuizController::class, 'index'])->name('admin.quizzes.index');
+
+    // Create a new quiz
+    Route::get('/quizzes/create', [QuizController::class, 'create'])->name('admin.quizzes.create');
+    Route::post('/quizzes', [QuizController::class, 'store'])->name('admin.quizzes.store');
+
+    // Edit an existing quiz
+    Route::get('/quizzes/{id}/edit', [QuizController::class, 'edit'])->name('admin.quizzes.edit');
+    Route::put('/quizzes/{id}', [QuizController::class, 'update'])->name('quizzes.update');
+
+    // Delete a quiz
+    Route::delete('/quizzes/{id}', [QuizController::class, 'destroy'])->name('admin.quizzes.destroy');
+
+    // Add questions to a quiz
+    Route::get('/quizzes/{id}/questions/create', [QuizController::class, 'addQuestions'])->name('admin.quizzes.addQuestions');
+    Route::post('/quizzes/{id}/questions', [QuizController::class, 'storeQuestions'])->name('admin.quizzes.storeQuestions');
+
+    Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('admin.quizzes.show');
+    Route::post('/quizzes/{id}/submit', [QuizController::class, 'submit'])->name('quizzes.submit');
+    Route::post('/quizzes/{id}/submit', [QuizController::class, 'submitQuiz'])->name('quizzes.submit');
+    Route::get('/quizzes/{quizId}/result', [QuizController::class, 'result'])->name('quizzes.result');
+
+
+
+
+    // batch
+    // In routes/web.php
+Route::get('/dashboard/select-batch', [StudentController::class, 'selectBatch'])->name('dashboard.selectBatch');
+Route::post('/dashboard/show-quiz', [StudentController::class, 'showQuiz'])->name('dashboard.showQuiz');
+Route::get('student/quizzes/{id}', [StudentController::class, 'show'])->name('student.quizzes.show');
+Route::get('/student/assignment', [StudentController::class, 'showAssignments'])->name('student.assignment');
+
+
+
 
 
 // clo_plo
@@ -140,10 +225,8 @@ Route::get('/clo_plo',[CloPloMapController::class,"index"])->name('admin.clo_plo
 Route::get('/programlearning',[ProgramLearningController::class,"index"])->name('admin.programlearning.index');
 // course
 Route::get('/courselearning',[CourseLearningController::class,"index"])->name('admin.courselearning.index');
-
 // assessments
 Route::get('/assessments',[AssessmentsController::class,"index"])->name('admin.assessments.index');
-
 Route::get('/student_assessments',[StudentAssessmentsController::class,"index"])->name('admin.student_assessments.index');
 Route::get('/notification',[NotificationsController::class,"index"])->name('admin.notification.index');
 

@@ -1,78 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Batch; // Ensure you import the Batch model
-use App\Models\Quiz; // Ensure you import the Batch model
+use App\Models\Quiz;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Option;
 use App\Models\UserAnswer;
-use App\Models\Assignment;
+use App\Models\Batch;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class QuizController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // Get all batches
+        $quizzes = Quiz::with('batches', 'course')->get();
+
+
+        return view('Dashboard.admin.quizzes.index', compact('quizzes'));
+    }
+
+
+    public function create()
+    {
+        $courses = Course::all();
         $batches = Batch::all();
 
-        // Get the selected batch id from the request
-        $batchId = $request->get('batch_id');
-
-        // Get quizzes based on the selected batch
-        $quizzes = collect(); // Default to an empty collection
-
-        if ($batchId) {
-            // Fetch quizzes for the selected batch
-            $quizzes = Quiz::whereHas('batches', function ($query) use ($batchId) {
-                $query->where('batch_id', $batchId);
-            })->get();
-        }
-
-        // Pass quizzes and batches to the view
-        return view('Student.dashboard', compact('quizzes', 'batches', 'batchId'));
+        return view('Dashboard.admin.quizzes.create', compact('courses', 'batches'));
     }
-
-
-
-
-    public function show($id) {
-        // Fetch the quiz with related questions and options
-        $quiz = Quiz::with('questions.options')->findOrFail($id);
-        return view('student.quizzes.show', compact('quiz')); // Ensure quiz is passed to the view
-    }
-
-
-
-    public function selectBatch()
-    {
-        // Retrieve all batches
-        $batches = Batch::all();
-
-        // Pass batches to the view
-        return view('dashboard.selectBatch', compact('batches'));
-    }
-
-
-
-
-    // Method to show the quizzes after selecting a batch
-    public function showQuiz(Request $request)
-    {
-        $batchId = $request->input('batch_id');
-
-        // Fetch quizzes related to the selected batch
-        $quizzes = Quiz::where('batch_id', $batchId)->get();
-
-        // Pass the quizzes to the view
-        return view('Student.Quizzes.show', compact('quizzes'));
-    }
-
-
-
-
-
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -96,9 +52,21 @@ class StudentController extends Controller
             $quiz->batches()->attach($request->batch_id);
         }
 
-        return redirect()->route('Student.Quizzes')->with('success', 'Quiz Created Successfully');
+        return redirect()->route('admin.quizzes.index')->with('success', 'Quiz Created Successfully');
     }
 
+
+
+
+
+    public function edit($id)
+    {
+        $quiz = Quiz::findOrFail($id);
+        $courses = Course::all();
+        $batches = Batch::all(); // Or filter as necessary
+
+        return view('Dashboard.admin.quizzes.edit', compact('quiz', 'courses', 'batches'));
+    }
 
     public function update(Request $request, $id)
 {
@@ -126,17 +94,23 @@ class StudentController extends Controller
         $quiz->batches()->sync($request->batch_id); // Sync ensures batches are attached/detached correctly
     }
 
-    return redirect()->route('Student.quizzes')->with('success', 'Quiz Updated Successfully');
+    return redirect()->route('admin.quizzes.index')->with('success', 'Quiz Updated Successfully');
 }
 
 
+    public function destroy($id)
+    {
+        $quiz = Quiz::findOrFail($id);
+        $quiz->delete();
+        return redirect()->route('admin.quizzes.index')->with('success', 'Quiz Deleted Successfully');
+    }
 
     public function addQuestions($id)
     {
         $quiz = Quiz::findOrFail($id);
         $batches = Batch::all(); // Fetch all batches
 
-        return view('Student.Quizzes.add-questions', compact('quiz', 'batches'));
+        return view('Dashboard.admin.quizzes.add-questions', compact('quiz', 'batches'));
     }
 
 
@@ -173,7 +147,17 @@ class StudentController extends Controller
 
 
         // Redirect to the quiz details page with a success message
-        return redirect()->route('Student.quizzes.show', $quiz->id)->with('success', 'Question and options added successfully.');
+        return redirect()->route('admin.quizzes.show', $quiz->id)->with('success', 'Question and options added successfully.');
+    }
+
+
+
+
+
+    public function show($id)
+    {
+        $quiz = Quiz::with('questions.options')->findOrFail($id);
+        return view('Dashboard.admin.quizzes.show', compact('quiz'));
     }
 
 
@@ -196,7 +180,7 @@ class StudentController extends Controller
         // Calculate the result
         $percentage = ($score / $totalQuestions) * 100;
 
-        return view('Student.quizzes.result', compact('quiz', 'score', 'totalQuestions', 'percentage'));
+        return view('quizzes.result', compact('quiz', 'score', 'totalQuestions', 'percentage'));
     }
 
 
@@ -249,16 +233,14 @@ class StudentController extends Controller
         $totalQuestions = $request->query('totalQuestions');
         $percentage = $request->query('percentage');
 
-        return view('Student.quizzes.result', compact('quiz', 'score', 'totalQuestions', 'percentage'));
-    }
-    public function showAssignments()
-    {
-        // Fetch assignments along with the associated course
-        $assignments = Assignment::with('course')->get();
-
-        return view('Student.Assignments.assignments', compact('assignments'));
+        return view('Dashboard.admin.quizzes.result', compact('quiz', 'score', 'totalQuestions', 'percentage'));
     }
 
 
 
-  }
+
+
+
+
+
+}
