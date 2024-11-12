@@ -57,6 +57,12 @@
         <span>Student Management</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+
+        <li>
+            <a href="{{ asset('/student/courses') }}">
+              <i class="bi bi-circle"></i><span>Student_Courses</span>
+            </a>
+          </li>
         <li>
           <a href="{{ asset('/view_enrolled') }}">
             <i class="bi bi-circle"></i><span>View Enrolled Students</span>

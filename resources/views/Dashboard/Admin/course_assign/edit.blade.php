@@ -13,9 +13,10 @@
                 <label for="user_id">Teacher</label>
                 <select name="user_id" id="user_id" class="form-control" required>
                     <option value="">Select Teacher</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}" {{ $courseAssign->user_id == $user->id ? 'selected' : '' }}>
-                            {{ $user->first_name }} {{ $user->last_name }}
+                    @foreach($teachers as $teacher)
+                        <option value="{{ $teacher->id }}" {{ $courseAssign->user_id == $teacher->id ? 'selected' : '' }}>
+                            {{ $teacher->firstname }} {{ $teacher->lastname }}
+                            @if($teacher->role) ({{ $teacher->role->role_name }}) @endif
                         </option>
                     @endforeach
                 </select>
@@ -28,7 +29,7 @@
                     <option value="">Select Department</option>
                     @foreach($departments as $department)
                         <option value="{{ $department->id }}" {{ $courseAssign->department_id == $department->id ? 'selected' : '' }}>
-                            {{ $department->name }}
+                            {{ $department->department_name }}
                         </option>
                     @endforeach
                 </select>

@@ -49,11 +49,12 @@ class CourseAssignController extends Controller
         $courses = Course::all();
         $batches = Batch::all();
         $teachers = User::with('role')->where('role_id', 1)->get(); // Adjust based on your criteria
-
         $departments = Department::all();
 
         return view('Dashboard.admin.course_assign.edit', compact('courseAssign', 'courses', 'batches', 'teachers', 'departments'));
     }
+
+
 
     public function update(Request $request, $id)
     {

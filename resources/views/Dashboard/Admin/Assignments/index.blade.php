@@ -17,7 +17,7 @@
         <tbody>
             @foreach($assignments as $assignment)
                 <tr>
-                    <td>{{ $assignment->course->name }}</td>
+                    <td>{{ optional($assignment->course)->name }}</td>
                     <td>{{ $assignment->title }}</td>
                     <td>{{ $assignment->description }}</td>
                     <td>{{ \Carbon\Carbon::parse($assignment->due_date)->format('d-m-Y H:i') }}</td>
@@ -28,9 +28,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Remove</button>
                         </form>
-
                     </td>
-                    
                 </tr>
             @endforeach
         </tbody>

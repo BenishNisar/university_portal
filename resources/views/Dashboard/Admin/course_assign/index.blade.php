@@ -84,12 +84,15 @@
             <tbody>
                 @foreach ($courseAssignments as $assignment)
                 <tr>
-                    <td>{{ $assignment->course->name }}</td>
-                    <td>{{ $assignment->batch->name }}</td>
-                    <td>{{ $assignment->teacher->firstname }} {{ $assignment->teacher->lastname }}</td>
-                    <td>{{ $assignment->department->department_name }}</td>
-                    <td>{{ $assignment->semester }}</td>
-                    <td>{{ $assignment->year }}</td>
+                    <td>{{ optional($assignment->course)->name ?? 'N/A' }}</td>
+                    <td>{{ optional($assignment->batch)->name ?? 'N/A' }}</td>
+                    <td>
+                        {{ optional($assignment->teacher)->firstname ?? 'N/A' }}
+                        {{ optional($assignment->teacher)->lastname ?? '' }}
+                    </td>
+                    <td>{{ optional($assignment->department)->department_name ?? 'N/A' }}</td>
+                    <td>{{ $assignment->semester ?? 'N/A' }}</td>
+                    <td>{{ $assignment->year ?? 'N/A' }}</td>
                     <td>
                         <a href="{{ route('admin.course_assign.edit', $assignment->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('admin.course_assign.destroy', $assignment->id) }}" method="POST" style="display:inline;">
@@ -99,10 +102,9 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
-
-                <!-- Additional rows can be added here -->
+                @endforeach
             </tbody>
+
         </table>
     </div>
 </div>

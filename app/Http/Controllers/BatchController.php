@@ -60,7 +60,7 @@ public function update(Request $request, $id)
         'end_year' => $request->end_year,
     ]);
 
-    return redirect()->route('Dashboard.admin.batches.index')->with('success', 'Batch updated successfully.');
+    return redirect()->route('admin.batches.index')->with('success', 'Batch updated successfully.');
 }
 public function destroy($id)
 {
