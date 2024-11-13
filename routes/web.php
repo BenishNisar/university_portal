@@ -4,6 +4,8 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssessmentsController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\AssignmentsController;
+use App\Http\Controllers\AssignmentSubmissionController;
 use App\Http\Controllers\AttendenceRecordsController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CloPloMapController;
@@ -21,9 +23,11 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramLearningController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScheduleTimingsController;
 use App\Http\Controllers\StudentAssessmentsController;
+use App\Http\Controllers\StudentAssignmentsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentPerformanceTrackingController;
@@ -259,3 +263,30 @@ Route::get('/credit_hr',[CreditHoursController::class,"index"])->name('admin.cre
 Route::get('/grade_performance',[GradePerformanceController::class,"index"])->name('admin.grade_performance.index');
 
 
+
+
+Route::get('/student/{userId}/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+//asignmentorquiz
+
+Route::get('/teacher/assignmentes', [AssignmentsController::class, 'index'])->name('teacher.assignmentes.index');
+Route::get('/teacher/quizzes', [QuizsController::class, 'index'])->name('teacher.quizzes.index');
+Route::post('/courses/{id}/toggle-quizzes', [QuizsController::class, 'toggleQuizzes'])->name('toggleQuizzes');
+Route::post('/courses/{id}/toggle-assignments', [AssignmentsController::class, 'toggleAssignments'])->name('toggleAssignments');
+
+
+//student_dashboard
+
+Route::get('/student/assignments', [StudentAssignmentsController::class, 'index'])->name('student.assignments.index');
+
+
+
+// Show assignments and quizzes for a student
+Route::get('/student/assignments-quizzes', [StudentAssignmentsController::class, 'showAssignmentsAndQuizzes'])->name('student.assignments.index');
+
+// Upload assignment
+Route::post('/student/{courseId}/upload-assignment', [StudentAssignmentsController::class, 'uploadAssignment'])->name('student.uploadAssignment');
+
+// Upload quiz
+Route::post('/student/{courseId}/upload-quiz', [StudentAssignmentsController::class, 'uploadQuiz'])->name('student.uploadQuiz');
+
+Route::get('/teacher/assignment_submission', [AssignmentSubmissionController::class, 'index'])->name('teacher.assignment_submission');

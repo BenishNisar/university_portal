@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2024 at 08:24 AM
+-- Generation Time: Nov 13, 2024 at 07:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -34,15 +34,41 @@ CREATE TABLE `assignments` (
   `description` text NOT NULL,
   `due_date` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `file_path` varchar(700) NOT NULL,
+  `uploaded_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `assignments`
 --
 
-INSERT INTO `assignments` (`id`, `course_id`, `title`, `description`, `due_date`, `updated_at`, `created_at`) VALUES
-(1, 1, 'Periodic table', 'Make a periodic Table', '1980-11-08 05:24:00', '2024-11-12 12:33:22', '2024-11-07 13:58:16');
+INSERT INTO `assignments` (`id`, `course_id`, `title`, `description`, `due_date`, `updated_at`, `created_at`, `file_path`, `uploaded_by`) VALUES
+(1, 1, 'Periodic table', 'Make a periodic Table', '1980-11-08 05:24:00', '2024-11-12 12:33:22', '2024-11-07 13:58:16', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment_submissions`
+--
+
+CREATE TABLE `assignment_submissions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(800) NOT NULL,
+  `description` text NOT NULL,
+  `file_path` varchar(900) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `assignment_submissions`
+--
+
+INSERT INTO `assignment_submissions` (`id`, `user_id`, `course_id`, `title`, `description`, `file_path`, `created_at`, `updated_at`) VALUES
+(1, 10, 1, 'test', 'test', 'assignments/pRtEtemM4qfGMieRfLIVYtmZIKK92L1cakvk9adT.pdf', '2024-11-13 12:42:34', '2024-11-13 12:42:34');
 
 -- --------------------------------------------------------
 
@@ -109,17 +135,20 @@ CREATE TABLE `courses` (
   `description` varchar(900) NOT NULL,
   `status` enum('available','assigned','','') NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `assignments_enabled` tinyint(1) NOT NULL,
+  `quizzes_enabled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `code`, `name`, `description`, `status`, `updated_at`, `created_at`) VALUES
-(1, 'Batch-3033', 'Thermodynamics', 'testingsss', 'available', '2024-11-05 04:46:23', '2024-11-05 04:46:23'),
-(2, 'Sit est exercitatio', 'Claire Gates', 'Eius omnis incididun', 'assigned', '2024-11-05 04:53:46', '2024-11-05 04:53:46'),
-(5, '8888', 'computet', 'commputer', 'assigned', '2024-11-12 13:00:53', '2024-11-12 13:00:53');
+INSERT INTO `courses` (`id`, `code`, `name`, `description`, `status`, `updated_at`, `created_at`, `assignments_enabled`, `quizzes_enabled`) VALUES
+(1, 'Batch-3033', 'Thermodynamics', 'testingsss', 'available', '2024-11-13 13:49:54', '2024-11-05 04:46:23', 1, 0),
+(2, 'Sit est exercitatio', 'Claire Gates', 'Eius omnis incididun', 'assigned', '2024-11-13 12:36:03', '2024-11-05 04:53:46', 1, 0),
+(5, '8888', 'computet', 'commputer', 'assigned', '2024-11-12 13:00:53', '2024-11-12 13:00:53', 0, 0),
+(6, '5656', 'python', 'python is a programming language', 'available', '2024-11-13 09:55:15', '2024-11-13 09:55:15', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -368,7 +397,17 @@ INSERT INTO `student_courses` (`course_id`, `status`, `updated_at`, `created_at`
 (2, 'completed', '2024-11-07 03:31:21', '2024-11-07 03:31:21', 0),
 (2, 'completed', '2024-11-07 03:33:46', '2024-11-07 03:33:46', 17),
 (2, 'completed', '2024-11-07 03:33:47', '2024-11-07 03:33:47', 17),
-(1, 'remaining', '2024-11-07 04:15:40', '2024-11-07 04:15:40', 17);
+(1, 'remaining', '2024-11-07 04:15:40', '2024-11-07 04:15:40', 17),
+(0, 'remaining', '2024-11-13 01:30:33', '2024-11-13 01:30:33', 10),
+(2, 'remaining', '2024-11-13 01:30:59', '2024-11-13 01:30:59', 10),
+(3, 'completed', '2024-11-13 01:53:05', '2024-11-13 01:53:05', 11),
+(4, 'remaining', '2024-11-13 01:55:50', '2024-11-13 01:55:50', 11),
+(2, 'completed', '2024-11-13 01:56:43', '2024-11-13 01:56:43', 10),
+(3, 'enrolled', '2024-11-13 01:57:23', '2024-11-13 01:57:23', 10),
+(5, 'enrolled', '2024-11-13 01:58:55', '2024-11-13 01:58:55', 10),
+(4, 'enrolled', '2024-11-13 06:06:24', '2024-11-13 06:06:24', 13),
+(5, 'completed', '2024-11-13 06:06:38', '2024-11-13 06:06:38', 13),
+(2, 'remaining', '2024-11-13 06:07:02', '2024-11-13 06:07:02', 13);
 
 -- --------------------------------------------------------
 
@@ -487,6 +526,12 @@ ALTER TABLE `assignments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `assignment_submissions`
+--
+ALTER TABLE `assignment_submissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `batches`
 --
 ALTER TABLE `batches`
@@ -581,6 +626,12 @@ ALTER TABLE `assignments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `assignment_submissions`
+--
+ALTER TABLE `assignment_submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `batches`
 --
 ALTER TABLE `batches`
@@ -596,7 +647,7 @@ ALTER TABLE `batch_quiz`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `course_assign`

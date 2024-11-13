@@ -10,7 +10,7 @@ use App\Models\Question; // Add this line
 class Quiz extends Model
 {
     use HasFactory;
-    protected $fillable = ['course_id', 'title', 'description', 'due_date'];
+    protected $fillable = ['course_id', 'title', 'description', 'file_path', 'uploaded_by'];
 
     public function questions()
     {

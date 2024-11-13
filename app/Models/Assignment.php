@@ -11,7 +11,8 @@ class Assignment extends Model
     protected $table = 'assignments';
 
     protected $fillable = [
-        'course_id', 'title', 'description', 'due_date'
+        'course_id', 'title', 'description', 'file_path', 'uploaded_by'
+
     ];
 
     // Define the relationship with the Course model
@@ -19,5 +20,10 @@ class Assignment extends Model
     {
         return $this->belongsTo(Course::class);
     }
-    
+
+    public function submissions()
+    {
+        return $this->hasMany(AssignmentSubmission::class);
+    }
+
 }

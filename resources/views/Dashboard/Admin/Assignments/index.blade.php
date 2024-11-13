@@ -16,6 +16,8 @@
         </thead>
         <tbody>
             @foreach($assignments as $assignment)
+
+            
                 <tr>
                     <td>{{ optional($assignment->course)->name }}</td>
                     <td>{{ $assignment->title }}</td>

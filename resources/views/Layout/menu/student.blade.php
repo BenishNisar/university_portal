@@ -26,7 +26,7 @@
      <!-- In your layout blade or sidebar -->
 <!-- In your layout blade or sidebar -->
 <li>
-    <a href="{{ route('student.assignment') }}">
+    <a href="{{ asset('student/assignments') }}">
         <i class="bi bi-circle"></i><span>Assignment</span>
     </a>
 </li>

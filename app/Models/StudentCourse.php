@@ -11,8 +11,11 @@ class StudentCourse extends Model
      // Defining the relationship with the Course model
      public function course()
      {
-         return $this->belongsTo(Course::class, 'course_id');
+         return $this->belongsTo(Course::class, 'course_id')->withDefault([
+             'name' => 'Unknown Course',
+         ]);
      }
+
 
      // Defining the relationship with the User model (student)
      public function user()

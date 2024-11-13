@@ -14,16 +14,34 @@
         <i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        {{-- <li>
+            <a href="{{ asset('/courses') }}">
+         <i class="bi bi-circle"></i><span>Courses</span>
+            </a>
+          </li> --}}
         <li>
-            <a href="{{ asset('/quizzes') }}">
+            <a href="{{ asset('/teacher/quizzes') }}">
          <i class="bi bi-circle"></i><span>Quizzes</span>
             </a>
           </li>
+
+
         <li>
-          <a href="{{ asset('/courses') }}">
-            <i class="bi bi-circle"></i><span>Course Management</span>
+          <a href="{{ asset('/teacher/assignmentes') }}">
+            <i class="bi bi-circle"></i><span>Assignments teacher Managements</span>
           </a>
         </li>
+
+        <li>
+            <a href="{{ asset('/assignments') }}">
+              <i class="bi bi-circle"></i><span>Assignments</span>
+            </a>
+          </li>
+        <li>
+            <a href="{{ asset('/teacher/assignment_submission') }}">
+              <i class="bi bi-circle"></i><span>Student_Assignments_Submisssion</span>
+            </a>
+          </li>
 
         <li>
             <a href="{{ asset('/courses_assigned') }}">
