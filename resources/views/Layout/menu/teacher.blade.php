@@ -19,6 +19,45 @@
          <i class="bi bi-circle"></i><span>Courses</span>
             </a>
           </li> --}}
+
+
+          <li>
+            <a href="">
+         <i class="bi bi-circle"></i><span>Hours Taught & Remaining</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="">
+         <i class="bi bi-circle"></i><span>Enter Student Marks</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="{{ asset('teacher/quiz_question_bank') }}">
+         <i class="bi bi-circle"></i><span>Quizzes Question Bank</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="{{ asset('teacher/view_quizzes') }}">
+         <i class="bi bi-circle"></i><span>Views Quizs</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="">
+         <i class="bi bi-circle"></i><span>Student Missing Quizzes & Assignments</span>
+            </a>
+          </li>
+
+
+
+
         <li>
             <a href="{{ asset('/teacher/quizzes') }}">
          <i class="bi bi-circle"></i><span>Quizzes</span>

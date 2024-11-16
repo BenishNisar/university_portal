@@ -22,6 +22,7 @@ use App\Http\Controllers\ManageController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramLearningController;
+use App\Http\Controllers\QuizBankQuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizsController;
 use App\Http\Controllers\RolesController;
@@ -36,6 +37,7 @@ use App\Http\Controllers\StudyMaterialsController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ViewEnrolledController;
+use App\Http\Controllers\ViewQuizesController;
 use App\Models\StudentCourse;
 use Illuminate\Support\Facades\Route;
 
@@ -290,3 +292,22 @@ Route::post('/student/{courseId}/upload-assignment', [StudentAssignmentsControll
 Route::post('/student/{courseId}/upload-quiz', [StudentAssignmentsController::class, 'uploadQuiz'])->name('student.uploadQuiz');
 
 Route::get('/teacher/assignment_submission', [AssignmentSubmissionController::class, 'index'])->name('teacher.assignment_submission');
+
+Route::get('/teacher/quiz_question_bank', [QuizBankQuestionController::class, 'index'])->name('teacher.quiz_question_bank');
+
+
+Route::post('/teacher/quiz_question_bank/save-quiz-data', [QuizBankQuestionController::class, 'saveQuiz'])->name('teacher.quiz_question_bank.quiz.save');
+Route::get('/quiz-bank', [QuizBankQuestionController::class, 'index'])->name('quiz-bank.index');
+Route::post('/save-quiz', [QuizBankQuestionController::class, 'saveQuiz'])->name('quiz-bank.save');
+
+
+
+// viewQuiz
+
+Route::get('/teacher/view_quizzes', [ViewQuizesController::class, 'index'])->name('teacher.view_quizzes.index');
+// Route::get('/teacher/view_quizzes/print/{subjectId}', [ViewQuizesController::class, 'print'])->name('teacher.view_quizzes.print');
+
+
+
+
+Route::get('/teacher/view_quizzes/views/{subjectId}', [ViewQuizesController::class, 'views'])->name('teacher.view_quizzes.views');

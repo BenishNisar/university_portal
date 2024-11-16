@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2024 at 07:56 AM
+-- Generation Time: Nov 16, 2024 at 06:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `online_exam_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answers`
+--
+
+CREATE TABLE `answers` (
+  `id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answer_text` text NOT NULL,
+  `is_correct` tinyint(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -279,6 +294,20 @@ CREATE TABLE `plo` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quest`
+--
+
+CREATE TABLE `quest` (
+  `id` int(11) NOT NULL,
+  `quiz_id` int(11) NOT NULL,
+  `question_text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `questions`
 --
 
@@ -306,6 +335,38 @@ INSERT INTO `questions` (`id`, `quiz_id`, `text`, `correct_option_id`, `created_
 (7, 6, 'Quod aperiam sunt au', 2, '2024-11-11 00:40:20', '2024-11-11 00:40:20', 1),
 (8, 9, 'What does HTML stand for?', 2, '2024-11-11 01:30:56', '2024-11-11 01:30:56', 1),
 (9, 3, 'ASP.NET Core MVC framework ka primary use kya hai?', 1, '2024-11-12 13:03:12', '2024-11-12 13:03:12', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quizs`
+--
+
+CREATE TABLE `quizs` (
+  `id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `quiz_number` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `semester_id` int(11) NOT NULL,
+  `answer_1` varchar(300) NOT NULL,
+  `answer_2` varchar(300) NOT NULL,
+  `answer_3` varchar(300) NOT NULL,
+  `answer_4` varchar(100) NOT NULL,
+  `correct_answer` int(11) NOT NULL,
+  `question` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quizs`
+--
+
+INSERT INTO `quizs` (`id`, `subject_id`, `quiz_number`, `created_at`, `updated_at`, `semester_id`, `answer_1`, `answer_2`, `answer_3`, `answer_4`, `correct_answer`, `question`) VALUES
+(5, 2, '1', '2024-11-16 04:27:56', '2024-11-16 04:27:56', 3, 'structured query Language', 'language', 'stractured language', 'language', 1, 'what is sql?'),
+(6, 2, '5', '2024-11-16 11:19:47', '2024-11-16 11:19:47', 2, 'hypertext markeup language', 'hypertoxt makeup language', 'hyperb text lnguagr', 'htmlss', 3, 'what is html?'),
+(7, 1, '6', '2024-11-16 11:26:13', '2024-11-16 11:26:13', 2, 'test', 'test', 'test', 'test', 1, 'test'),
+(8, 0, '811', '2024-11-16 03:30:16', '2024-11-16 03:30:16', 0, '', '', '', '', 0, ''),
+(9, 2, '8', '2024-11-16 11:31:11', '2024-11-16 11:31:11', 3, 'hypertext markeup language', 'Molestiae et consequ', 'test', 'Aut dolorem soluta a', 3, 'what is html?');
 
 -- --------------------------------------------------------
 
@@ -378,6 +439,28 @@ INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `semesters`
+--
+
+CREATE TABLE `semesters` (
+  `id` int(11) NOT NULL,
+  `name` varchar(800) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `semesters`
+--
+
+INSERT INTO `semesters` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Semester 1', '2024-11-14 07:43:47', '2024-11-14 07:43:47'),
+(2, 'semester 2', '2024-11-14 18:31:25', '2024-11-14 18:31:25'),
+(3, 'Semester 3', '2024-11-14 18:45:56', '2024-11-14 18:45:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student_courses`
 --
 
@@ -408,6 +491,28 @@ INSERT INTO `student_courses` (`course_id`, `status`, `updated_at`, `created_at`
 (4, 'enrolled', '2024-11-13 06:06:24', '2024-11-13 06:06:24', 13),
 (5, 'completed', '2024-11-13 06:06:38', '2024-11-13 06:06:38', 13),
 (2, 'remaining', '2024-11-13 06:07:02', '2024-11-13 06:07:02', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL,
+  `semester_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `semester_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Physics', '2024-11-14 07:42:24', '2024-11-14 07:42:24'),
+(2, 2, 'computer', '2024-11-14 18:29:34', '2024-11-14 18:29:34');
 
 -- --------------------------------------------------------
 
@@ -520,6 +625,12 @@ INSERT INTO `user_answers` (`id`, `users_id`, `quiz_id`, `question_id`, `option_
 --
 
 --
+-- Indexes for table `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `assignments`
 --
 ALTER TABLE `assignments`
@@ -580,9 +691,21 @@ ALTER TABLE `plo`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `quest`
+--
+ALTER TABLE `quest`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quizs`
+--
+ALTER TABLE `quizs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -604,6 +727,18 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `semesters`
+--
+ALTER TABLE `semesters`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -618,6 +753,12 @@ ALTER TABLE `user_answers`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `assignments`
@@ -680,9 +821,21 @@ ALTER TABLE `plo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `quest`
+--
+ALTER TABLE `quest`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `quizs`
+--
+ALTER TABLE `quizs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
@@ -702,6 +855,18 @@ ALTER TABLE `quiz_attempts`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `semesters`
+--
+ALTER TABLE `semesters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

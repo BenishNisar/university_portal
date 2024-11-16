@@ -11,7 +11,7 @@
                 @foreach($question->options as $option)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="answers[{{ $question->id }}]"
-                               id="option{{ $option->id }}" value="{{ $option->id }}" required>
+                                 id="option{{ $option->id }}" value="{{ $option->id }}" required>
                         <label class="form-check-label" for="option{{ $option->id }}">
                             {{ $option->text }}
                         </label>
