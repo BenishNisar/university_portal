@@ -93,7 +93,7 @@ footer {
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="{{url('/')}}" class="logo d-flex align-items-center">
             <img src="{{ asset('Dashboard_assets/img/Ilama_University.png') }}" style="width: 200px;" alt="Logo">
         </a>
         <i style="font-size:22px;position: relative;left:-22px;" class="bi bi-list toggle-sidebar-btn"></i>
