@@ -320,4 +320,6 @@ Route::get('/teacher/view_quizzes/views/{subjectId}', [ViewQuizesController::cla
 Route::post('/assign-course', [TeacherController::class, 'assignCourse'])->name('assignCourse');
 Route::post('/unassign-course', [TeacherController::class, 'unassignCourse'])->name('unassignCourse');
 Route::get('/programs/{programId}/courses', [TeacherController::class, 'fetchCourses']);
+// student
+Route::get('/get-course-details', [StudentController::class, 'getCourseDetails'])->name('get-course-details');
 

@@ -34,6 +34,28 @@ class StudentController extends Controller
         return view('Student.dashboard', compact('completedCourses', 'remainingCourses', 'enrolledCourses'));
     }
 
+    public function getCourseDetails(Request $request)
+    {
+        $courseId = $request->id;
+
+        // Fetch the course by ID
+        $course = Course::find($courseId);
+
+        if ($course) {
+            // Return data as JSON
+            return response()->json([
+                'exam' => $course->exam ?? 'N/A',
+                'session' => $course->session ?? 'N/A',
+                'hoursTaught' => $course->hours_taught ?? 'N/A', // Make sure these fields exist in your DB
+                'remainingHours' => $course->remaining_hours ?? 'N/A',
+            ]);
+        }
+
+        return response()->json(['error' => 'Course not found'], 404);
+    }
+
+
+
 
 
 
@@ -52,6 +74,7 @@ class StudentController extends Controller
     //     // Pass data to the view
     //     return view('student.dashboard', compact('completedCourses', 'remainingCourses',  'courses'));
     // }
+
 
 
 

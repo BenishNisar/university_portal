@@ -13,7 +13,7 @@ class Course extends Model
         'code',
         'description',
         'status',
-        
+
         'assignments_enabled',
         'quizzes_enabled',
 'program_id',
