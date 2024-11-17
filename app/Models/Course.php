@@ -13,6 +13,10 @@ class Course extends Model
         'code',
         'description',
         'status',
+        
+        'assignments_enabled',
+        'quizzes_enabled',
+'program_id',
     ];
 
     public function assignments()
@@ -25,4 +29,14 @@ class Course extends Model
     {
         return $this->hasMany(Quiz::class);
     }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
+    public function courseAssigns()
+    {
+        return $this->hasMany(CourseAssign::class, 'course_id');
+    }
+
 }

@@ -38,4 +38,9 @@ class User extends Authenticatable
         return $this->hasMany(AssignmentSubmission::class);
     }
 
+
+    public function courseAssigns()
+    {
+        return $this->hasMany(CourseAssign::class, 'user_id', 'id');
+    }
 }

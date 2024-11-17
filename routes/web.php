@@ -126,6 +126,7 @@ Route::get('/courses',[CoursesController::class,"index"])->name('admin.courses.i
     Route::delete('/courses/{id}', [CoursesController::class, 'destroy'])->name('admin.courses.destroy');
 
 
+
 // batches
 Route::get('/batches', [BatchController::class, 'index'])->name('admin.batches.index');
 Route::get('/batches/add', [BatchController::class, 'add'])->name('admin.batches.add');
@@ -311,3 +312,12 @@ Route::get('/teacher/view_quizzes', [ViewQuizesController::class, 'index'])->nam
 
 
 Route::get('/teacher/view_quizzes/views/{subjectId}', [ViewQuizesController::class, 'views'])->name('teacher.view_quizzes.views');
+
+
+
+// teacher
+
+Route::post('/assign-course', [TeacherController::class, 'assignCourse'])->name('assignCourse');
+Route::post('/unassign-course', [TeacherController::class, 'unassignCourse'])->name('unassignCourse');
+Route::get('/programs/{programId}/courses', [TeacherController::class, 'fetchCourses']);
+

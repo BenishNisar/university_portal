@@ -1,51 +1,102 @@
 @extends('Layout.Dashboard_Layout')
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 
 @section('AdminContent')
-<div class="container">
+<div class="container mt-4">
+    <h1>Teacher Dashboard</h1>
 
-    <!-- Assigned Courses List -->
-    <h2>Assigned Courses</h2>
-    <div class="assigned-courses">
-        @foreach($courses as $course)
-            <div class="course-card">
-                <h3>{{ $course->name }}</h3>
+    <!-- Program Dropdown -->
+    <div class="mb-4">
+        <label for="program" class="form-label">Select Program:</label>
+        <select id="program" class="form-select" onchange="fetchCourses(this.value)">
+            <option value="">-- Select Program --</option>
+            @foreach($programs as $program)
+                <option value="{{ $program->id }}">{{ $program->name }}</option>
+            @endforeach
+        </select>
+    </div>
 
-                <!-- Dropdown for course options -->
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Teacher Options
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#hoursTaught">Hours Taught & Remaining</a>
-                        <a class="dropdown-item" href="#enterMarks">Enter Student Marks</a>
-                        <a class="dropdown-item" href="#quizzesQuestionBank">Quizzes Question Bank</a>
-                        <a class="dropdown-item" href="#missingQuizzesAssignments">Student Missing Quizzes & Assignments</a>
-                    </div>
-                </div>
+    <!-- Courses Table -->
+    <div class="row">
+        <div class="col-md-6">
+            <h3>All Courses</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($allCourses as $course)
+                        <tr>
+                            <td>{{ $course->name }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-                <!-- Option Sections -->
-                <div id="hoursTaught" class="mt-4">
-                    <!-- Hours Taught Form & Table -->
-                </div>
-
-                <div id="enterMarks" class="mt-4">
-                    <!-- Enter Marks Form & Table -->
-                </div>
-
-                <div id="quizzesQuestionBank" class="mt-4">
-                    <!-- Quizzes Question Bank Form & Table -->
-                </div>
-
-                <div id="missingQuizzesAssignments" class="mt-4">
-                    <!-- Missing Quizzes & Assignments List -->
-                </div>
-
-            </div>
-        @endforeach
+        <div class="col-md-6">
+            <h3>Assigned Courses</h3>
+            <table class="table table-bordered" id="assigned-courses">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamically updated via JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function fetchCourses(programId) {
+    if (!programId) {
+        $('#assigned-courses tbody').empty();
+        $('table.table-bordered:first tbody').empty();
+        return;
+    }
+
+    $.ajax({
+        url: `/programs/${programId}/courses`,
+        method: 'GET',
+        success: function (response) {
+            // Update Assigned Courses Table
+            let assignedCoursesHtml = '';
+            response.assignedCourses.forEach(assign => {
+                assignedCoursesHtml += `
+                    <tr>
+                        <td>${assign.course.name}</td>
+                    </tr>`;
+            });
+            $('#assigned-courses tbody').html(assignedCoursesHtml);
+
+            // Update All Courses Table
+            let allCoursesHtml = '';
+            response.allCourses.forEach(course => {
+                allCoursesHtml += `
+                    <tr>
+                        <td>${course.name}</td>
+                    </tr>`;
+            });
+            $('table.table-bordered:first tbody').html(allCoursesHtml);
+        },
+        error: function (xhr) {
+            console.error("Error fetching courses:", xhr.responseText);
+        }
+    });
+}
+
+// Trigger fetching courses on page load (if a program is selected by default)
+$(document).ready(function () {
+    const defaultProgramId = $('#program').val();
+    if (defaultProgramId) {
+        fetchCourses(defaultProgramId);
+    }
+});
+</script>
+
 @endsection
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

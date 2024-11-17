@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Course; // Assuming Course is the model for 'courses' table
+use App\Models\Program;
+use App\Models\CourseAssign;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -65,5 +67,35 @@ class CoursesController extends Controller
 
         return redirect()->route('admin.courses.index')->with('success', 'Course deleted successfully.');
     }
+
+
+
+    // courses
+    // public function getCourses($programId)
+    // {
+    //     $program = Program::with('courses')->find($programId);
+
+    //     if (!$program) {
+    //         return response()->json(['error' => 'Program not found'], 404);
+    //     }
+
+    //     $assignedCourses = auth()->user()
+    //         ->courseAssigns()
+    //         ->whereHas('course', function ($query) use ($programId) {
+    //             $query->where('program_id', $programId);
+    //         })
+    //         ->with('course')
+    //         ->get();
+
+    //     return response()->json([
+    //         'allCourses' => $program->courses,
+    //         'assignedCourses' => $assignedCourses->pluck('course'),
+    //     ]);
+    // }
+
+
+
+
+
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2024 at 06:43 PM
+-- Generation Time: Nov 17, 2024 at 09:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -152,18 +152,19 @@ CREATE TABLE `courses` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `assignments_enabled` tinyint(1) NOT NULL,
-  `quizzes_enabled` tinyint(1) NOT NULL
+  `quizzes_enabled` tinyint(1) NOT NULL,
+  `program_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `code`, `name`, `description`, `status`, `updated_at`, `created_at`, `assignments_enabled`, `quizzes_enabled`) VALUES
-(1, 'Batch-3033', 'Thermodynamics', 'testingsss', 'available', '2024-11-13 13:49:54', '2024-11-05 04:46:23', 1, 0),
-(2, 'Sit est exercitatio', 'Claire Gates', 'Eius omnis incididun', 'assigned', '2024-11-13 12:36:03', '2024-11-05 04:53:46', 1, 0),
-(5, '8888', 'computet', 'commputer', 'assigned', '2024-11-12 13:00:53', '2024-11-12 13:00:53', 0, 0),
-(6, '5656', 'python', 'python is a programming language', 'available', '2024-11-13 09:55:15', '2024-11-13 09:55:15', 0, 0);
+INSERT INTO `courses` (`id`, `code`, `name`, `description`, `status`, `updated_at`, `created_at`, `assignments_enabled`, `quizzes_enabled`, `program_id`) VALUES
+(1, 'Batch-3033', 'JavaScript for Web Development', 'testingsss', 'available', '2024-11-13 13:49:54', '2024-11-05 04:46:23', 1, 0, 4),
+(2, 'Sit est exercitatio', 'C++ Programming for Beginners', 'Eius omnis incididun', 'assigned', '2024-11-13 12:36:03', '2024-11-05 04:53:46', 1, 0, 3),
+(5, '8888', 'computet', 'commputer', 'assigned', '2024-11-12 13:00:53', '2024-11-12 13:00:53', 0, 0, 1),
+(6, '5656', 'Python for Data Science', 'python is a programming language', 'available', '2024-11-13 09:55:15', '2024-11-13 09:55:15', 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -180,16 +181,19 @@ CREATE TABLE `course_assign` (
   `department_id` int(40) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `year` varchar(255) NOT NULL
+  `year` varchar(255) NOT NULL,
+  `program_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `course_assign`
 --
 
-INSERT INTO `course_assign` (`id`, `course_id`, `semester`, `batch_id`, `user_id`, `department_id`, `created_at`, `updated_at`, `year`) VALUES
-(1, 1, 1, 1, 1, 1, '2024-11-06 04:49:35', '2024-11-06 04:49:35', '2024'),
-(2, 3, 2, 3, 9, 1, '2024-11-06 14:16:04', '2024-11-06 14:16:04', '2024');
+INSERT INTO `course_assign` (`id`, `course_id`, `semester`, `batch_id`, `user_id`, `department_id`, `created_at`, `updated_at`, `year`, `program_id`) VALUES
+(1, 1, 1, 1, 1, 1, '2024-11-06 04:49:35', '2024-11-06 04:49:35', '2024', 1),
+(2, 2, 2, 3, 11, 1, '2024-11-06 14:16:04', '2024-11-06 14:16:04', '2024', 2),
+(5, 6, 2, 2, 1, 1, '2024-11-17 03:13:47', '2024-11-17 03:13:47', '2024', 1),
+(6, 5, 2, 1, 11, 2, '2024-11-17 03:47:06', '2024-11-17 03:47:06', '2024', 3);
 
 -- --------------------------------------------------------
 
@@ -290,6 +294,27 @@ CREATE TABLE `plo` (
   `program_id` varchar(200) NOT NULL,
   `description` varchar(599) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `programs`
+--
+
+CREATE TABLE `programs` (
+  `id` int(11) NOT NULL,
+  `name` varchar(800) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `programs`
+--
+
+INSERT INTO `programs` (`id`, `name`) VALUES
+(1, 'Javascript'),
+(2, 'Python'),
+(3, 'C++'),
+(4, 'React');
 
 -- --------------------------------------------------------
 
@@ -691,6 +716,12 @@ ALTER TABLE `plo`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `programs`
+--
+ALTER TABLE `programs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `quest`
 --
 ALTER TABLE `quest`
@@ -794,7 +825,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `course_assign`
 --
 ALTER TABLE `course_assign`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `course_options`
@@ -819,6 +850,12 @@ ALTER TABLE `options`
 --
 ALTER TABLE `plo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `programs`
+--
+ALTER TABLE `programs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `quest`
