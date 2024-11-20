@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2024 at 06:43 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: Nov 20, 2024 at 07:26 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -162,7 +162,7 @@ CREATE TABLE `courses` (
 INSERT INTO `courses` (`id`, `code`, `name`, `description`, `status`, `updated_at`, `created_at`, `assignments_enabled`, `quizzes_enabled`) VALUES
 (1, 'Batch-3033', 'Thermodynamics', 'testingsss', 'available', '2024-11-13 13:49:54', '2024-11-05 04:46:23', 1, 0),
 (2, 'Sit est exercitatio', 'Claire Gates', 'Eius omnis incididun', 'assigned', '2024-11-13 12:36:03', '2024-11-05 04:53:46', 1, 0),
-(5, '8888', 'computet', 'commputer', 'assigned', '2024-11-12 13:00:53', '2024-11-12 13:00:53', 0, 0),
+(5, '8888', 'computer', 'commputer', 'assigned', '2024-11-12 13:00:53', '2024-11-12 13:00:53', 0, 0),
 (6, '5656', 'python', 'python is a programming language', 'available', '2024-11-13 09:55:15', '2024-11-13 09:55:15', 0, 0);
 
 -- --------------------------------------------------------
@@ -180,16 +180,17 @@ CREATE TABLE `course_assign` (
   `department_id` int(40) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `year` varchar(255) NOT NULL
+  `year` varchar(255) NOT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `course_assign`
 --
 
-INSERT INTO `course_assign` (`id`, `course_id`, `semester`, `batch_id`, `user_id`, `department_id`, `created_at`, `updated_at`, `year`) VALUES
-(1, 1, 1, 1, 1, 1, '2024-11-06 04:49:35', '2024-11-06 04:49:35', '2024'),
-(2, 3, 2, 3, 9, 1, '2024-11-06 14:16:04', '2024-11-06 14:16:04', '2024');
+INSERT INTO `course_assign` (`id`, `course_id`, `semester`, `batch_id`, `user_id`, `department_id`, `created_at`, `updated_at`, `year`, `status`) VALUES
+(1, 1, 1, 1, 1, 1, '2024-11-06 04:49:35', '2024-11-06 04:49:35', '2024', NULL),
+(2, 3, 2, 3, 9, 1, '2024-11-06 14:16:04', '2024-11-06 14:16:04', '2024', NULL);
 
 -- --------------------------------------------------------
 
@@ -224,7 +225,48 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `department_name`, `updated_at`, `created_at`) VALUES
-(1, 'Computer Sciencess', '2024-11-05 02:05:29', '2024-11-05 01:57:42');
+(1, 'Computer Science', '2024-11-17 17:02:56', '2024-11-05 01:57:42'),
+(2, 'Civil Engineering', '2024-11-17 17:07:56', '2024-11-17 17:07:56'),
+(3, 'Mechanical Engineering', '2024-11-17 17:08:07', '2024-11-17 17:08:07'),
+(4, 'Electrical Engineering', '2024-11-17 17:08:18', '2024-11-17 17:08:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manage_students`
+--
+
+CREATE TABLE `manage_students` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `student_id` varchar(50) NOT NULL,
+  `courses_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `enrollment_date` date NOT NULL,
+  `graduation_date` date DEFAULT NULL,
+  `current_year` int(11) DEFAULT NULL,
+  `semester` varchar(10) DEFAULT NULL,
+  `cgpa` decimal(3,2) DEFAULT 0.00,
+  `status` enum('Active','Graduated','Dropped') DEFAULT 'Active',
+  `guardian_name` varchar(100) DEFAULT NULL,
+  `guardian_contact` varchar(15) DEFAULT NULL,
+  `scholarship_status` tinyint(1) DEFAULT 0,
+  `student_type` enum('Regular','Part-Time','Exchange') DEFAULT 'Regular',
+  `Batch` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `manage_students`
+--
+
+INSERT INTO `manage_students` (`id`, `user_id`, `phone_number`, `date_of_birth`, `address`, `student_id`, `courses_id`, `department_id`, `enrollment_date`, `graduation_date`, `current_year`, `semester`, `cgpa`, `status`, `guardian_name`, `guardian_contact`, `scholarship_status`, `student_type`, `Batch`, `created_at`, `updated_at`) VALUES
+(1, 10, '3000000000', '2000-10-30', 'House # 4,House # 5, Dha Phase 2 Karachi', 'Stundent112233', 5, 1, '2024-11-04', '2028-11-04', 2024, 'Semester 1', 0.00, 'Active', 'Farhan', '03000000000', 0, 'Regular', '2024-4-3', '2024-11-18 18:33:08', '2024-11-19 07:15:46'),
+(2, 23, '3000000000', '2000-10-30', 'DHA PHASE 1', 'Stundent112244', 6, 1, '2024-11-04', '2028-11-04', 2024, 'Semester 1', 0.00, 'Active', 'Muhammad Ishaq', '03000000000', 0, 'Regular', '2024-01-B', '2024-11-18 21:59:34', '2024-11-18 21:59:34');
 
 -- --------------------------------------------------------
 
@@ -366,7 +408,8 @@ INSERT INTO `quizs` (`id`, `subject_id`, `quiz_number`, `created_at`, `updated_a
 (6, 2, '5', '2024-11-16 11:19:47', '2024-11-16 11:19:47', 2, 'hypertext markeup language', 'hypertoxt makeup language', 'hyperb text lnguagr', 'htmlss', 3, 'what is html?'),
 (7, 1, '6', '2024-11-16 11:26:13', '2024-11-16 11:26:13', 2, 'test', 'test', 'test', 'test', 1, 'test'),
 (8, 0, '811', '2024-11-16 03:30:16', '2024-11-16 03:30:16', 0, '', '', '', '', 0, ''),
-(9, 2, '8', '2024-11-16 11:31:11', '2024-11-16 11:31:11', 3, 'hypertext markeup language', 'Molestiae et consequ', 'test', 'Aut dolorem soluta a', 3, 'what is html?');
+(9, 2, '8', '2024-11-16 11:31:11', '2024-11-16 11:31:11', 3, 'hypertext markeup language', 'Molestiae et consequ', 'test', 'Aut dolorem soluta a', 3, 'what is html?'),
+(10, 1, '5', '2024-11-19 06:16:13', '2024-11-19 06:16:13', 1, 'a', 'b', 'c', 'd', 2, 'question 1');
 
 -- --------------------------------------------------------
 
@@ -527,40 +570,24 @@ CREATE TABLE `users` (
   `email` varchar(400) NOT NULL,
   `password` varchar(399) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `department_id` int(11) NOT NULL,
+  `department_id` int(11) DEFAULT NULL,
   `profile_img` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `gender` enum('female','male','','') NOT NULL,
   `country` varchar(300) NOT NULL,
-  `city` varchar(599) NOT NULL,
-  `batch_id` int(11) NOT NULL
+  `city` varchar(599) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role_id`, `department_id`, `profile_img`, `created_at`, `updated_at`, `gender`, `country`, `city`, `batch_id`) VALUES
-(1, 'Cailin', 'Holland', 'king@gmail.com', '$2y$10$de98cHd7OOK6xZAQcE4c8.kF5mjEkwBpvZSGn66qpl6woUMhzO5HC', 2, 15, 'assets/profile_images/1730650696_adnan.jfif', '2024-10-29 04:08:47', '2024-11-04 00:18:16', 'female', 'Amet sit voluptate', 'Ullam ullamco nemo m', 0),
-(2, 'Aaron', 'Burgess', 'cagohuzu@mailinator.com', '$2y$10$GH6mbB5I2E3.gYrQoF6tAerWZC7FWygFJ3uxq1Rl6IW0qliIMIvM6', 1, 81, 'assets/profile_images/1730650772_messages-2.jpg', '2024-10-29 04:09:28', '2024-11-04 00:19:32', 'female', 'Accusantium vero lab', 'Aut ipsa pariatur', 0),
-(3, 'Morgan', 'Blevins', 'kamicuhema@mailinator.com', '$2y$10$B3M95RAxB8J.ORpoSonqoOfQqiDCGI2jOAQr52AsxVjONUf.LtkrO', 2, 92, 'assets/profile_images/1730650787_messages-2.jpg', '2024-10-29 04:10:04', '2024-11-04 00:19:47', 'female', 'Impedit aliquam aut', 'Est dolore corrupti', 0),
-(4, 'Portia', 'Giles', 'jajytuhy@mailinator.com', '$2y$10$VC7RJ9r8QnIh3p0nvpLhA.robrG.PEPvBUKMhqFK/BxH0YQThDg.2', 3, 58, 'assets/profile_images/1730650716_messages-1.jpg', '2024-10-29 04:11:45', '2024-11-04 00:19:11', 'male', 'Possimus pariatur', 'Aut lorem repellendu', 0),
-(5, 'Celeste', 'Collier', 'nevoxu@mailinator.com', '$2y$10$sbxlt09ElbgUQDPMUC1Gs.3hqHMPrqsJaMTbUUS.R7pqtgOiKqF0O', 36, 15, 'assets/profile_images/1730650735_messages-1.jpg', '2024-10-29 04:12:59', '2024-11-04 00:18:55', 'male', 'Sint magnam est dol', 'Et culpa est adipis', 0),
-(7, 'benish', 'khan', 'benishkhan@gmail.com', 'benish@123', 1, 2, 'assets/profile_images/1730650803_messages-1.jpg', '2024-10-30 19:43:02', '2024-11-04 00:20:03', 'female', 'Pakistan', 'karachi', 0),
-(8, 'fatimakhan', 'khan', 'fatimazoha@gmail.com', '$2y$10$iTWP6y0BrzLJ8exFmUqGe.Y3S79Q8hSXENVAFE5W72JBwbUkEYAf6', 1, 1, 'assets/profile_images/1730650832_messages-1.jpg', '2024-10-31 03:36:27', '2024-11-04 00:20:32', 'female', 'Pakistan', 'karachi', 0),
-(9, 'haniya', 'khan', 'haniya@gmail.com', '$2y$10$McMgMzdusZ/CHqXJkz1cYeLReWVgrTT4TZdtMoi9oYdaigYPxIpMW', 2, 2, 'assets/profile_images/1730650818_adnan.jfif', '2024-10-31 10:37:52', '2024-11-04 00:20:18', 'female', 'pakistan', 'karachi', 0),
-(10, 'student', 'student', 'student@gmail.com', '$2y$10$nvoFAxWsZ.6nX5z6P0ipXuaHso18tn8I2UGhpGcjJohAkY3gUa/ea', 3, 2, 'assets/profile_images/1730641691_messages-1.jpg', '2024-10-31 11:36:10', '2024-11-03 21:48:11', 'female', 'Pakistan', 'Karachi', 0),
-(11, 'Adnan kaim khani', 'khani', 'Adnankaimkhani@gmail.com', '$2y$10$YQMaQ0M.JUa.AuYD1eFt5uYzqX0kw/6WJxsqlcGZH0M2QTX2dBZUW', 2, 1, 'assets/profile_images/1730641645_adnan.jfif', '2024-11-03 01:18:18', '2024-11-03 21:47:25', 'male', 'Pakistan', 'karachi', 0),
-(12, 'Zahid Ali', 'ali', 'zahidali@gmail.com', '$2y$10$HT1sR54t1XWoLYyjtTovse/o/.cD19LRYvl4AgAfhtsujV5Tm30vG', 2, 2, 'assets/profile_images/1730641622_messages-1.jpg', '2024-11-03 02:25:53', '2024-11-03 21:47:02', 'male', 'Pakistan', 'karachi', 0),
-(13, 'Aliza imran', 'imran', 'alizaimran@gmail.com', '$2y$10$GfDZ2w/pTqmX2zD/G1bdF.UXxZTMYr/Zqdvlz7Q75n494atu.8XpS', 3, 1, 'assets/profile_images/1730641506_messages-2.jpg', '2024-11-03 02:30:42', '2024-11-03 21:45:06', 'female', 'Pakistan', 'lahore', 0),
-(14, 'Ayesha rahim', 'rahim', 'ayesharahim@gmail.com', '$2y$10$jVvDqz5jGV8/kmGQrhAYwOOBAWdtiLpJRLqMzwvDYyoDOQxynAmWS', 3, 2, 'assets/profile_images/1730641477_profile-img.jpg', '2024-11-03 02:44:02', '2024-11-03 21:44:37', 'female', 'Pakistan', 'karachi', 0),
-(15, 'Shanzay', 'shoukat', 'shanzayshoukat@gmail.com', '$2y$10$aN5HwPaLh1VhFjT6qnT.teWguknmB05LGaga03JY7YcMHaRzuMHxu', 3, 2, 'assets/profile_images/1730641447_adnan.jfif', '2024-11-03 02:46:40', '2024-11-03 21:44:07', 'female', 'Pakistan', 'karachi', 0),
-(16, 'Laraib', 'khan', 'laraib@gmail.com', '$2y$10$5ac1kYNeqQ9mQmW.3NJ.LOVKHe0.JIus.3T1V4c6gBtJLpiktoUEi', 3, 2, 'assets/profile_images/1730641424_messages-3.jpg', '2024-11-03 02:49:11', '2024-11-03 21:43:44', 'female', 'Pakistan', 'karachi', 0),
-(17, 'admin', 'admin', 'admin@gmail.com', '$2y$10$hRp.huHR3QahDKB7WTp/Se7HtNqRHmBAoXZuLa8sFgZv.KXSkBjWq', 1, 2, 'assets/profile_images/1730641343_messages-1.jpg', '2024-11-03 16:03:53', '2024-11-03 21:42:23', 'male', 'Pakistan', 'Karachi', 0),
-(18, 'Quinn', 'Peterson', 'xyfyta@mailinator.com', '$2y$10$upKyngDKrwOtzsZkEB6jXuylljwWU5A1WGHFHhu4U0npAgmag/9jy', 3, 1, 'assets/profile_images/1730639760_adnan.jfif', '2024-11-03 21:16:00', '2024-11-05 03:15:24', 'female', 'Officia voluptatem', 'Expedita provident', 0),
-(19, 'Keelie', 'Johnson', 'jykevadab@mailinator.com', '$2y$10$c8bQyo1CsdyIoXuDvmhpTeWrpGQWjRfvrkv8Tx7wsNx7fAwRyIP/a', 3, 1, 'assets/profile_images/1730639901_adnan.jfif', '2024-11-03 21:18:21', '2024-11-05 03:14:58', 'female', 'Eos dolor sunt qui', 'Ad excepturi sed vel', 0),
-(20, 'Anastasia', 'Rocha', 'ruriryfeju@mailinator.com', '$2y$10$A2kFBugibsBrDmVyEtOXreTW8/0xGulCYtOrK/gv6WlQnlzcXO1wW', 3, 1, 'assets/profile_images/1730746742_adnan.jfif', '2024-11-05 02:59:02', '2024-11-05 02:59:02', 'female', 'At enim irure dolore', 'Unde neque enim veni', 0);
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role_id`, `department_id`, `profile_img`, `created_at`, `updated_at`, `gender`, `country`, `city`) VALUES
+(10, 'Hamza', 'Ali', 'student@gmail.com', '$2y$10$nvoFAxWsZ.6nX5z6P0ipXuaHso18tn8I2UGhpGcjJohAkY3gUa/ea', 3, 2, 'assets/profile_images/1731965405_man3.jpg', '2024-10-31 11:36:10', '2024-11-18 16:30:05', 'male', 'Pakistan', 'Karachi'),
+(12, 'Zahid', 'Ali', 'zahidali@gmail.com', '$2y$10$HT1sR54t1XWoLYyjtTovse/o/.cD19LRYvl4AgAfhtsujV5Tm30vG', 2, 2, 'assets/profile_images/1731885140_1730641343_messages-1.jpg', '2024-11-03 02:25:53', '2024-11-18 03:42:25', 'male', 'Pakistan', 'karachi'),
+(17, 'admin', 'admin', 'admin@gmail.com', '$2y$10$hRp.huHR3QahDKB7WTp/Se7HtNqRHmBAoXZuLa8sFgZv.KXSkBjWq', 1, 2, 'assets/profile_images/1731885210_images.png', '2024-11-03 16:03:53', '2024-11-03 21:42:23', 'male', 'Pakistan', 'Karachi'),
+(23, 'Noman', 'Ishaq', 'nomanishaq241@gmail.com', '$2y$10$W7KHCdYjGra5zsoCb/WsD.Zmg7rYLtxznnt4bgceXZ4Fxu.5y1LZu', 3, 1, 'assets/profile_images/1731966906_images.jpeg', '2024-11-18 16:55:06', '2024-11-18 16:55:06', 'male', 'Pakistan', 'Karachi');
 
 -- --------------------------------------------------------
 
@@ -677,6 +704,16 @@ ALTER TABLE `course_options`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `manage_students`
+--
+ALTER TABLE `manage_students`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `student_id` (`student_id`),
+  ADD KEY `fk_user` (`user_id`),
+  ADD KEY `fk_courses` (`courses_id`),
+  ADD KEY `fk_department` (`department_id`);
 
 --
 -- Indexes for table `options`
@@ -806,7 +843,13 @@ ALTER TABLE `course_options`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `manage_students`
+--
+ALTER TABLE `manage_students`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `options`
@@ -836,7 +879,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `quizs`
 --
 ALTER TABLE `quizs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `quizzes`
@@ -854,7 +897,7 @@ ALTER TABLE `quiz_attempts`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `semesters`
@@ -872,13 +915,25 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `user_answers`
 --
 ALTER TABLE `user_answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `manage_students`
+--
+ALTER TABLE `manage_students`
+  ADD CONSTRAINT `fk_courses` FOREIGN KEY (`courses_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
