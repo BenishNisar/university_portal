@@ -5,36 +5,30 @@ use App\Models\User;
 
 use App\Models\StudentCourse;
 use App\Models\Course;
-
+use App\Models\ManageStudents;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
 
     public function index()
-    {
-        $userId = auth()->user()->id;
+{
+    $userId = auth()->user()->id;
 
-        // Fetch completed, remaining, and enrolled courses for the user
-        $completedCourses = StudentCourse::where('user_id', $userId)
-                            ->where('status', 'completed')
-                            ->with('course') // Updated to match relationship method name
-                            ->get();
+    // Fetch ManageStudents data for the logged-in user
+    $studentManage = ManageStudents::where('user_id', $userId)
+        ->with(['user', 'course', 'department']) // Eager load related models
+        ->first();
 
-        $remainingCourses = StudentCourse::where('user_id', $userId)
-                            ->where('status', 'remaining')
-                            ->with('course')
-                            ->get();
-
-        $enrolledCourses = StudentCourse::where('user_id', $userId)
-                            ->where('status', 'enrolled')
-                            ->with('course')
-                            ->get();
-
-        return view('Student.dashboard', compact('completedCourses', 'remainingCourses', 'enrolledCourses'));
+    // Redirect back if no data is found
+    if (!$studentManage) {
+        return redirect()->back()->with('error', 'No student data found.');
     }
 
 
+    return view('Student.dashboard', compact('studentManage'));
+}
 
 
     // public function showDashboard($userId)

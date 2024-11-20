@@ -2,16 +2,31 @@
 
 @section("AdminContent")
 
-<h1>Add Department</h1>
 
-<h1>Edit Department</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Edit Department</h1>
 
-<form action="{{ route('admin.departments.update', $department->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <label>Department Name:</label>
-    <input type="text" name="department_name" value="{{ $department->department_name }}" required>
-    <button type="submit">Update Department</button>
-</form>
+            <form class="pt-4" action="{{ route('admin.departments.update', $department->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+
+                <div class="form-group">
+                    <label>Department Name:</label>
+                    <input type="text" name="department_name" class="form-control" value="{{ $department->department_name }}" required>
+                </div>
+
+                <div class="form-group pt-3">
+                    <button type="submit" class="btn btn-success">Update Department</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
 
 @endsection

@@ -8,116 +8,30 @@
     </li><!-- End Dashboard Nav -->
 
 
-    {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('dashboard/admin/profile') }}">
-          <i style="color: gray; font-size:15px;" class="fas fa-bell"></i>
-          <span>Profile</span>
+
+
+  
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('/student/studentcourse') }}">
+          <i style="color: gray; font-size:15px;" class="fas fa-users-cog" aria-hidden="true"></i>
+          <span>My Courses</span>
         </a>
-      </li> --}}
+      </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('/student/assignmentupload') }}">
+          <i style="color: gray; font-size:15px;" class="fa fa-bullhorn" aria-hidden="true"></i>
+          <span>Assignments</span>
+        </a>
+      </li>
 
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
-        <i style="color: gray; font-size:15px;" class="fas fa-users-cog"></i>
-        <span>My Courses</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-     <!-- In your layout blade or sidebar -->
-<!-- In your layout blade or sidebar -->
-<li>
-    <a href="{{ asset('student/assignments') }}">
-        <i class="bi bi-circle"></i><span>Assignment</span>
-    </a>
-</li>
-
-
-
-          <a href="{{ asset('/courses') }}">
-            <i class="bi bi-circle"></i><span>Enrolled Courses</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('/faculty_timings') }}">
-            <i class="bi bi-circle"></i><span>Faculty & Timings</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ asset('/credit_hr') }}">
-            <i class="bi bi-circle"></i><span>Credit Hours</span>
-          </a>
-        </li>
-
-        <li>
-            <a href="{{ asset('/study_material') }}">
-              <i class="bi bi-circle"></i><span>Study Materials</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="{{ asset('/courses') }}">
-              <i class="bi bi-circle"></i><span>Course Outlines</span>
-            </a>
-          </li>
-
-
-      </ul>
-    </li><!-- End Users Manage Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i style="color: gray; font-size:15px;" class="fas fa-book-open"></i>
-        <span>Exams & Grades</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="{{ asset('/exam_schedule') }}">
-            <i class="bi bi-circle"></i><span>Exam Schedule</span>
-          </a>
-        </li>
-
-
-        <li>
-            <a href="{{ asset('/grade_performance') }}">
-              <i class="bi bi-circle"></i><span>Grades & Performance</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="{{ asset('/clo_plo') }}">
-              <i class="bi bi-circle"></i><span>CLO Progress</span>
-            </a>
-          </li>
-
-
-      </ul>
-    </li><!-- End Courses Nav -->
-
-    {{-- <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-
-        <i style="color: gray; font-size:15px;" class="fas fa-bell"></i>
-        <span>Notifications</span>
-      </a>
-      <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="forms-elements.html">
-            <i class="bi bi-circle"></i><span>Study Material Updates</span>
-          </a>
-        </li>
-        <li>
-          <a href="forms-layouts.html">
-            <i class="bi bi-circle"></i><span>Exam Alerts</span>
-          </a>
-        </li>
-
-        <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Grade Announcements</span>
-            </a>
-          </li>
-      </ul>
-    </li><!-- End PLO Or CLO Nav --> --}}
+        <a class="nav-link collapsed" href="{{ url('/student/quiz') }}">
+          <i style="color: gray; font-size:15px;" class="fa fa-file"></i>
+          <span>Quiz</span>
+        </a>
+      </li>
 
 
 
@@ -128,12 +42,6 @@
         </a>
       </li>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('dashboard/admin/settings') }}">
-            <i style="color: gray; font-size:15px;" class="fas fa-cog"></i>
-            <span>Settings</span>
-        </a>
-    </li> --}}
 
 
 

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Login Form</title>
+    <title>Login || Ilma University (FORMERLY INSTITUTE OF BUSINESS & TECHNOLOGY (IBT)) </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -89,29 +89,31 @@
                 @csrf
                 <img src="{{ asset('Dashboard_assets/img/Ilama_University.png') }}" alt="University Logo" class="centered-image">
 
+                <div style="text-align: start;">
                 <label class="form-title">Email</label>
                 <input type="text" name="email" placeholder="Enter Email" required class="form-control">
                 @error('email')
                     <label class="text-danger">{{ $message }}</label>
                 @enderror
 
+                </div>
                 <br>
+                <div style="text-align: start;">
                 <label class="form-title">Password</label>
                 <input type="password" name="password" placeholder="Password" required class="form-control">
                 @error('password')
                     <label class="text-danger">{{ $message }}</label>
                 @enderror
+                </div>
 
                 <div class="forgot-password">
-                    <a href="#">Forgot password?</a>
+                    <!-- <a href="#">Forgot password?</a> -->
                 </div>
 
-                <button style="background-color: #a05052;" type="submit" class="btn btn-info">Login</button>
-
-                <div class="login-footer">
-                    <span>Don’t have an account?</span>
-                    <a href="{{ url('/register') }}">Sign up</a>
+                <div style="padding-top: 3rem;">
+                    <button style="background-color: #a05052;" type="submit" class="btn btn-info">Login</button>
                 </div>
+                
             </form>
         </div>
 

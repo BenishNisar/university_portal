@@ -1,50 +1,93 @@
 @extends('Layout.Dashboard_Layout')
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-
+<!-- Custom Styles -->
+<style>
+    .dropdown-custom {
+        border: 1px solid #007bff;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        font-size: 16px;
+        color: #007bff;
+        background-color: #f8f9fa;
+        text-align: left;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-custom:focus, .dropdown-custom:hover {
+        background-color: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+    .dropdown-custom option {
+        padding: 8px;
+    }
+</style>
 @section('AdminContent')
-<div class="container">
+<div class="container-fluid">
+    <h3>Wellcome Back {{ Auth::user()->firstname }}!</h3>
+    <h6><b>Teacher Dashboard</b></h6>
 
-    <!-- Assigned Courses List -->
-    <h2>Assigned Courses</h2>
-    <div class="assigned-courses">
-        @foreach($courses as $course)
-            <div class="course-card">
-                <h3>{{ $course->name }}</h3>
+    <!-- Courses Table -->
+    <h2 class="mt-5">Courses</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
 
-                <!-- Dropdown for course options -->
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Teacher Options
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#hoursTaught">Hours Taught & Remaining</a>
-                        <a class="dropdown-item" href="#enterMarks">Enter Student Marks</a>
-                        <a class="dropdown-item" href="#quizzesQuestionBank">Quizzes Question Bank</a>
-                        <a class="dropdown-item" href="#missingQuizzesAssignments">Student Missing Quizzes & Assignments</a>
-                    </div>
-                </div>
+       
 
-                <!-- Option Sections -->
-                <div id="hoursTaught" class="mt-4">
-                    <!-- Hours Taught Form & Table -->
-                </div>
+              <!-- Enrolled Courses -->
+            <tr>
+                <td>Programm</td>
+                <td>
+                    <select class="dropdown-custom">
+                            <option>Computer Science</option>
+                            <option>Civil Engineering</option>
+                            <option >Electrical Engineering</option>
+                            <option>Mechanical Engineering</option>
 
-                <div id="enterMarks" class="mt-4">
-                    <!-- Enter Marks Form & Table -->
-                </div>
+                    </select>
+                </td>
+            </tr>
 
-                <div id="quizzesQuestionBank" class="mt-4">
-                    <!-- Quizzes Question Bank Form & Table -->
-                </div>
 
-                <div id="missingQuizzesAssignments" class="mt-4">
-                    <!-- Missing Quizzes & Assignments List -->
-                </div>
+                   <!-- Enrolled Courses -->
+            <tr>
+                <td>Courses</td>
+                <td>
+                    <select class="dropdown-custom">
+                            <option selected>Programming Fundamentals</option>
+                            <option>Programming Fundamentals (Lab)</option>
+                            <option>Calculus And Analytical Geometry</option>
+                            <option>Applied Physics </option>
+                            <option>Applied Physics (Lab)</option>
+                            <option>English Composition & Comprehension </option>
+                            <option>Islamic Studies/Ethical Behavior</option>
+                            <option>Object Oriented Programming </option>
+                            <option>Object Oriented Programming (Lab) </option>
+                            <option>Digital Logic Design </option>
+                            <option>Digital Logic Design (Lab)</option>
+                            <option>Pakistan Studies</option>
+                            <option>Communication and Presentation Skills</option>
+                            <option>Linear Algebra</option>
+                            <option>Web Engineering </option>
+                            <option>Web Engineering (Lab)</option>
+                            <option>Data Structures and Algorithms </option>
+                            <option>Data Structures and Algorithms (Lab)</option>
+                            <option>Computer Communication Networks </option>
+                            <option>Computer Communication Networks (Lab)</option>
+                            <option>Technical Report Writing</option>
+                            <option>Introduction to Software Engineering </option>
+                            <option>Introduction to Software Engineering (Lab)</option>
+                    </select>
+                </td>
+            </tr>
 
-            </div>
-        @endforeach
-    </div>
+
+        </thead>
+    </table>
+
+    <p>The Course Data not live yet</p>
+
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
