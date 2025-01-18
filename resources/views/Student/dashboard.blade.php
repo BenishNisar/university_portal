@@ -78,11 +78,10 @@
                 <td>
                     <select class="dropdown-custom">
                         <option disabled selected>Select an Action</option>
-                        <option value="hours_taught">Hours Taught</option>
-                        <option value="remaining_hours">Remaining Hours</option>
-                        <option value="view_sessional_marks">View Sessional Marks</option>
-                        <option value="view_mid_marks">View Mid Marks</option>
-                        <option value="view_final_marks">View Final Marks</option>
+                        <option value="hours_taught">Hours Taught and Remaining</option>
+
+                        <option value="view_mid_marks">Mid and Final Marks</option>
+
                         <option value="upload_quiz">Upload Quiz</option>
                         <option value="upload_assignment">Upload Assignment</option>
                     </select>
@@ -99,17 +98,15 @@
                     </select>
                 </td>
                 <td>
-                    <select class="dropdown-custom">
+                    <select class="dropdown-custom" onchange="handleDropdownChange(this)">
                         <option disabled selected>Select an Action</option>
-                        <option value="hours_taught">Hours Taught</option>
-                        <option value="remaining_hours">Remaining Hours</option>
-                        <option value="view_sessional_marks">View Sessional Marks</option>
-                        <option value="view_mid_marks">View Mid Marks</option>
-                        <option value="view_final_marks">View Final Marks</option>
-                        <option value="upload_quiz">Upload Quiz</option>
-                        <option value="upload_assignment">Upload Assignment</option>
+                        <option value="{{ route('student_details.hours_taught') }}">Hours Taught and Remaining</option>
+                        <option value="{{ route('student_details.mid_marks') }}">Mid and Final Marks</option>
+                        <option value="{{ route('student_details.upload_quiz') }}">Upload Quiz</option>
+                        <option value="{{ route('student_details.upload_assignment') }}">Upload Assignment</option>
                     </select>
                 </td>
+
             </tr>
             <tr>
                 <td>Enrolled Courses</td>
@@ -164,6 +161,17 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+    function handleDropdownChange(select) {
+        const selectedValue = select.value;
+        if (selectedValue) {
+            window.location.href = selectedValue; // Redirect to the selected URL
+        }
+    }
+</script>
+
 <script>
     function showCourseDetails(select) {
     console.log("Fetching details for course ID:", select.value); // Log to verify the function is called

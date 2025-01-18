@@ -110,7 +110,7 @@
 
                 <div class="login-footer">
                     <span>Don’t have an account?</span>
-                    <a href="{{ url('/register') }}">Sign up</a>
+                    <a href="{{ url('dashboard/auth/register') }}">Sign up</a>
                 </div>
             </form>
         </div>

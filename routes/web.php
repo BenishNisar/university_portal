@@ -25,12 +25,14 @@ use App\Http\Controllers\ProgramLearningController;
 use App\Http\Controllers\QuizBankQuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizsController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScheduleTimingsController;
 use App\Http\Controllers\StudentAssessmentsController;
 use App\Http\Controllers\StudentAssignmentsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCourseController;
+use App\Http\Controllers\StudentDetailsController;
 use App\Http\Controllers\StudentPerformanceTrackingController;
 use App\Http\Controllers\StudyMaterialController;
 use App\Http\Controllers\StudyMaterialsController;
@@ -62,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
 // Define the login route
 Route::get('/login', [AccountController::class, 'accountlogin'])->name('login');
 Route::get('/logout', [AccountController::class, 'logout'])->name('logout');
+
+Route::get('dashboard/auth/register', [RegisterController::class, 'index'])->name('dashboard.auth.register');
+Route::post('dashboard/auth/register/store', [RegisterController::class, 'store'])->name('dashboard.auth.register.store');
 
 
 Route::get('/account/login', [AccountController::class, 'accountlogin'])->name('account.login');
@@ -323,3 +328,11 @@ Route::get('/programs/{programId}/courses', [TeacherController::class, 'fetchCou
 // student
 Route::get('/get-course-details', [StudentController::class, 'getCourseDetails'])->name('get-course-details');
 
+
+
+Route::prefix('student-details')->group(function () {
+    Route::get('hours-taught', [StudentDetailsController::class, 'showHours'])->name('student_details.hours_taught');
+    Route::get('/mid-marks', [StudentDetailsController::class, 'showMidMarks'])->name('student_details.mid_marks');
+    Route::get('/upload-quiz', [StudentDetailsController::class, 'uploadQuiz'])->name('student_details.upload_quiz');
+    Route::get('/upload-assignment', [StudentDetailsController::class, 'uploadAssignment'])->name('student_details.upload_assignment');
+});
