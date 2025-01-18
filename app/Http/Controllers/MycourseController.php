@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CloPloMapController extends Controller
+class MycourseController extends Controller
 {
     public function index()
     {
         // Fetch all departments from the database
+        return view('Student.mycourse.index');
 
-        return view('Dashboard.admin.clo_plo.index');
     }
 }

@@ -6,12 +6,11 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>University Examination Portal</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="{{asset('Dashboard_assets/img/Ilama_University.png')}}" rel="icon">
   <link href="{{ asset( 'Dashboard_assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <link href="{{ asset( 'Dashboard_assets/img/icon.png')}}" rel="icon" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -117,24 +116,17 @@ footer {
                 </a>
             </li><!-- End Notification Icon -->
 
-            <!-- New Icon -->
-            <li class="nav-item">
-                <a class="nav-link nav-icon" href="#" style="color: darkgray; transition: none; font-size: 15px;" title="Create New">
-                    <i class="bi bi-plus-circle"></i>
-                </a>
-            </li><!-- End New Icon -->
-
+  
             <!-- Profile Icon -->
             <li class="nav-item dropdown">
                 <a class="nav-link nav-icon dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgray; transition: none; font-size: 15px;">
                     <img class="img-xs rounded-circle" src="{{ asset(Auth::user()->profile_img) }}" alt="" style="width: 30px; height: 30px;">
 
-                    <span class="navbar-profile-name">{{ Auth::user()->firstname }}</span>
+                    <span class="navbar-profile-name text-capitalize">{{ Auth::user()->firstname }}</span>
                     <i class="mdi mdi-menu-down"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                     <li><a class="dropdown-item" href="/profile/index">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
 
                 </ul>
             </li>

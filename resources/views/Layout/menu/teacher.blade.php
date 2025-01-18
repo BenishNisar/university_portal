@@ -14,25 +14,6 @@
         <i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        {{-- <li>
-            <a href="{{ asset('/courses') }}">
-         <i class="bi bi-circle"></i><span>Courses</span>
-            </a>
-          </li> --}}
-
-
-          <li>
-            <a href="">
-         <i class="bi bi-circle"></i><span>Hours Taught & Remaining</span>
-            </a>
-          </li>
-
-
-          <li>
-            <a href="">
-         <i class="bi bi-circle"></i><span>Enter Student Marks</span>
-            </a>
-          </li>
 
 
           <li>
@@ -49,27 +30,6 @@
           </li>
 
 
-          <li>
-            <a href="">
-         <i class="bi bi-circle"></i><span>Student Missing Quizzes & Assignments</span>
-            </a>
-          </li>
-
-
-
-
-        <li>
-            <a href="{{ asset('/teacher/quizzes') }}">
-         <i class="bi bi-circle"></i><span>Quizzes</span>
-            </a>
-          </li>
-
-
-        <li>
-          <a href="{{ asset('/teacher/assignmentes') }}">
-            <i class="bi bi-circle"></i><span>Assignments teacher Managements</span>
-          </a>
-        </li>
 
         <li>
             <a href="{{ asset('/assignments') }}">
@@ -79,27 +39,6 @@
         <li>
             <a href="{{ asset('/teacher/assignment_submission') }}">
               <i class="bi bi-circle"></i><span>Student_Assignments_Submisssion</span>
-            </a>
-          </li>
-
-        <li>
-            <a href="{{ asset('/courses_assigned') }}">
-              <i class="bi bi-circle"></i><span>Course Management</span>
-            </a>
-          </li>
-
-
-
-
-        <li>
-            <a href="{{ asset('/schedule_timings') }}">
-              <i class="bi bi-circle"></i><span>Schedule & Timings</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{ asset('/study_material') }}">
-              <i class="bi bi-circle"></i><span>Study Materials Upload
-            </span>
             </a>
           </li>
 
@@ -142,54 +81,8 @@
       </ul>
     </li><!-- End Courses Nav -->
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i style="color: gray; font-size:15px;" class="fas fa-tasks"></i>
-          <span>PLO Or CLO</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ asset('/programlearning') }}">
-              <i class="bi bi-circle"></i><span>Program Learning Outcomes</span>
-            </a>
-          </li>
-          <li>
-            <a  href="{{ asset('/courselearning') }}">
-              <i class="bi bi-circle"></i><span>Course Learning Outcomes</span>
-            </a>
-          </li>
+  
 
-
-          <li>
-            <a  href="{{ asset('/clo_plo') }}">
-              <i class="bi bi-circle"></i><span>CLO-PLO Mapping</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End PLO Or CLO Nav -->
-
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i style="color: gray; font-size:15px;" class="fas fa-poll"></i>
-          <span>Assessments</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ asset('/manage_exams') }}">
-              <i class="bi bi-circle"></i><span>Create & Manage Exams</span>
-            </a>
-          </li>
-
-
-          <li>
-            <a href="{{ asset('/exam_schedule') }}">
-              <i class="bi bi-circle"></i><span>Exam Schedules</span>
-            </a>
-          </li>
-
-        </ul>
-      </li><!-- End Assessments Nav -->
 
 
       <li class="nav-item">
@@ -200,46 +93,6 @@
       </li>
       <!-- End Notification Nav -->
 
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#notification" data-bs-toggle="collapse" href="#">
-          <i style="color: gray; font-size:15px;" class="fas fa-book-open"></i>
-          <span>Notifications </span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="notification" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ asset('dashboard/admin/incidents') }}">
-              <i class="bi bi-circle"></i><span>Updates on Course Changes
-            </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="{{ asset('dashboard/admin/incidents') }}">
-              <i class="bi bi-circle"></i><span>Student Alerts
-            </span>
-            </a>
-          </li>
-
-
-          <li>
-            <a href="{{ asset('dashboard/admin/incidents') }}">
-              <i class="bi bi-circle"></i><span>System Notifications
-            </span>
-            </a>
-          </li>
-        </ul>
-      </li>
- --}}
-
-      <!-- End Courses Nav -->
-
-
-    {{-- <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ url('dashboard/admin/incidents') }}">
-        <i style="color: gray; font-size:15px;" class="fas fa-bell"></i>
-        <span>As</span>
-      </a>
-    </li><!-- End Notification Nav --> --}}
 
 
   </ul>

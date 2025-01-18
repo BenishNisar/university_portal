@@ -91,7 +91,7 @@
     <div class="info">
         <ul>
             <li>Subject Name: {{ $subject->name }}</li>
-            <li>Student Name: {{ $quizzes->first()->user->firstname ?? 'No Student Assigned' }}</li>
+            <li>Student Name: </li>
             <li>Faculty Name: {{ Auth::user()->firstname }} </li>
         </ul>
 
@@ -114,11 +114,10 @@
     <table>
         <tr>
             <th style="width: 40%;">Question</th>
-            <th>Answer 1</th>
-            <th>Answer 2</th>
-            <th>Answer 3</th>
-            <th>Answer 4</th>
-            <th>Correct Answers</th>
+            <th>Option (A)</th>
+            <th>Option (B)</th>
+            <th>Option (C)</th>
+            <th>Option (D)</th>
         </tr>
 
         @foreach ($quizzes as $quiz)
@@ -128,7 +127,6 @@
             <td>{{ $quiz->answer_2 }}</td>
             <td>{{ $quiz->answer_3 }}</td>
             <td>{{ $quiz->answer_4 }}</td>
-            <td>{{ $quiz->correct_answer }}</td>
         </tr>
         @endforeach
     </table>

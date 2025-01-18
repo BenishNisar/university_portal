@@ -42,7 +42,6 @@ class UsersController extends Controller
                'password' => 'required|string|min:8',
                'role_id' => 'required|integer',
                'department_id' => 'required|integer',
-               'batch_id' => 'nullable|integer', // Validate batch_id
                'profile_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                'gender' => 'nullable|string',
                'country' => 'required|string',
@@ -65,7 +64,6 @@ class UsersController extends Controller
                'password' => Hash::make($request->password),
                'role_id' => $request->role_id,
                'department_id' => $request->department_id,
-               'batch_id' => $request->batch_id, // Store batch_id
                'profile_img' => $path,
                'gender' => $request->gender,
                'country' => $request->country,
@@ -97,7 +95,6 @@ class UsersController extends Controller
                'password' => 'nullable|string|min:8',
                'role_id' => 'required|integer',
                'department_id' => 'required|integer',
-               'batch_id' => 'nullable|integer', // Validate batch_id
                'profile_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                'gender' => 'nullable|in:female,male',
                'country' => 'required|string|max:300',
@@ -115,7 +112,6 @@ class UsersController extends Controller
 
            $user->role_id = $request->role_id;
            $user->department_id = $request->department_id;
-           $user->batch_id = $request->batch_id; // Update batch_id
 
            if ($request->hasFile('profile_img')) {
                $destinationPath = public_path('assets/profile_images');

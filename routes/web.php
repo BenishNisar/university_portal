@@ -19,6 +19,8 @@ use App\Http\Controllers\ExamScheduleController;
 use App\Http\Controllers\FacultyTimingsController;
 use App\Http\Controllers\GradePerformanceController;
 use App\Http\Controllers\ManageController;
+use App\Http\Controllers\ManageStudentController;
+use App\Http\Controllers\MycourseController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramLearningController;
@@ -29,11 +31,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScheduleTimingsController;
 use App\Http\Controllers\StudentAssessmentsController;
+use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\StudentAssignmentsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentDetailsController;
 use App\Http\Controllers\StudentPerformanceTrackingController;
+use App\Http\Controllers\StudentUploadQuizController;
 use App\Http\Controllers\StudyMaterialController;
 use App\Http\Controllers\StudyMaterialsController;
 use App\Http\Controllers\TeacherController;
@@ -69,57 +73,49 @@ Route::get('dashboard/auth/register', [RegisterController::class, 'index'])->nam
 Route::post('dashboard/auth/register/store', [RegisterController::class, 'store'])->name('dashboard.auth.register.store');
 
 
+
+// Admin
+// Route::get('/',[DashboardController::class,"index"]);
+Route::get('/admin/users', [UsersController::class, 'index'])->name('admin.users.index');
+Route::get('/admin/users/add', [UsersController::class, 'add'])->name('admin.users.add');
+Route::post('/admin/users/store', [UsersController::class, 'store'])->name('admin.users.store');
+Route::get('/admin/users/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
+Route::delete('/admin/users/destroy/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
+Route::put('/admin/users/{id}', [UsersController::class, 'update'])->name('admin.users.update');
+
 Route::get('/account/login', [AccountController::class, 'accountlogin'])->name('account.login');
 Route::post('/accountlogin/login-store', [AccountController::class, 'accountloginstore'])->name('account.login.store');
 
 
-
-// Admin
-// Route::get('/',[DashboardController::class,"index"]);
-Route::get('/users', [UsersController::class, 'index'])->name('admin.users.index');
-Route::get('/users/add', [UsersController::class, 'add'])->name('admin.users.add');
-Route::post('/users/store', [UsersController::class, 'store'])->name('admin.users.store');
-
-Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
-Route::delete('/users/destroy/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
-
-Route::put('/users/{id}', [UsersController::class, 'update'])->name('admin.users.update');
-
-
 // Roles
-
-Route::get('/roles',[RolesController::class,"index"])->name('admin.roles.index');
-Route::get('/roles/add', [RolesController::class, 'add'])->name('admin.roles.add');
-Route::post('/roles/store', [RolesController::class, 'store'])->name('admin.roles.store');
-Route::get('/roles/edit/{id}', [RolesController::class, 'edit'])->name('admin.roles.edit');
-Route::put('/roles/update/{id}', [RolesController::class, 'update'])->name('admin.roles.update');
-Route::delete('/roles/destroy/{id}', [RolesController::class, 'destroy'])->name('admin.roles.destroy');
-
-
-
-
+Route::get('/admin/roles',[RolesController::class,"index"])->name('admin.roles.index');
+Route::get('/admin/roles/add', [RolesController::class, 'add'])->name('admin.roles.add');
+Route::post('/admin/roles/store', [RolesController::class, 'store'])->name('admin.roles.store');
+Route::get('/admin/roles/edit/{id}', [RolesController::class, 'edit'])->name('admin.roles.edit');
+Route::put('/admin/roles/update/{id}', [RolesController::class, 'update'])->name('admin.roles.update');
+Route::delete('/admin/roles/destroy/{id}', [RolesController::class, 'destroy'])->name('admin.roles.destroy');
 // Route::get('/Teacher',[TeacherController::class,"dashboard"]);
+
 // // Student
 // Route::get('/Student',[TeacherController::class,"dashboard"]);
 
-
-
 // Department
-Route::get('/departments',[DepartmentsController::class,"index"])->name('admin.departments.index');
-// Show the form to add a new department
-Route::get('/departments/add', [DepartmentsController::class, 'add'])->name('admin.departments.add');
+Route::get('/admin/departments',[DepartmentsController::class,"index"])->name('admin.departments.index');
+Route::get('/admin/departments/add', [DepartmentsController::class, 'add'])->name('admin.departments.add');
+Route::post('/admin/departments', [DepartmentsController::class, 'store'])->name('admin.departments.store');
+Route::get('/admin/departments/{id}/edit', [DepartmentsController::class, 'edit'])->name('admin.departments.edit');
+Route::put('/admin/departments/{id}', [DepartmentsController::class, 'update'])->name('admin.departments.update');
+Route::delete('/admin/departments/{id}', [DepartmentsController::class, 'destroy'])->name('admin.departments.destroy');
+Route::get('/admin/managestudents',[ManageStudentController::class,"index"])->name('admin.managestudent.index');
 
-// Store the new department in the database
-Route::post('/departments', [DepartmentsController::class, 'store'])->name('admin.departments.store');
 
-// Show the form to edit an existing department
-Route::get('/departments/{id}/edit', [DepartmentsController::class, 'edit'])->name('admin.departments.edit');
 
-// Update an existing department
-Route::put('/departments/{id}', [DepartmentsController::class, 'update'])->name('admin.departments.update');
+// student
+Route::get('/student/assignmentupload',[StudentAssignmentController::class,"index"])->name('Student.uploadAssignment.index');
+Route::get('/student/quiz',[StudentUploadQuizController::class,"index"])->name('Student.uploadQuiz.index');
+Route::get('/student/studentcourse',[MycourseController::class,"index"])->name('Student.mycourse.index');
 
-// Optional: Delete a department
-Route::delete('/departments/{id}', [DepartmentsController::class, 'destroy'])->name('admin.departments.destroy');
+
 
 // courses
 Route::get('/courses',[CoursesController::class,"index"])->name('admin.courses.index');
@@ -229,10 +225,6 @@ Route::get('/student/assignment', [StudentController::class, 'showAssignments'])
 
 
 
-
-
-// clo_plo
-Route::get('/clo_plo',[CloPloMapController::class,"index"])->name('admin.clo_plo.index');
 // program
 Route::get('/programlearning',[ProgramLearningController::class,"index"])->name('admin.programlearning.index');
 // course
@@ -254,7 +246,6 @@ Route::get('/student_performance_tracking',[StudentPerformanceTrackingController
 Route::get('/attendence_records',[AttendenceRecordsController::class,"index"])->name('admin.attendence_records.index');
 
 
-Route::get('/exam_schedule',[ExamScheduleController::class,"index"])->name('admin.exam_schedule.index');
 
 
 Route::get('/manage_exams',[ManageController::class,"index"])->name('admin.manage_exams.index');
@@ -266,9 +257,6 @@ Route::get('/faculty_timings',[FacultyTimingsController::class,"index"])->name('
 
 Route::get('/credit_hr',[CreditHoursController::class,"index"])->name('admin.credit_hr.index');
 
-
-
-Route::get('/grade_performance',[GradePerformanceController::class,"index"])->name('admin.grade_performance.index');
 
 
 
